@@ -6,6 +6,7 @@ import rogue2.entite.monstre.MonsterFactory;
 import rogue2.entite.player.Player;
 import rogue3.artefact.Artefact;
 import rogue3.artefact.ArtefactFactory;
+import rogue3.artefact.Portal;
 import rogue3.artefact.Potion;
 
 import java.util.ArrayList;
@@ -25,6 +26,16 @@ public class Grille {
     private ArrayList <Player> listPlayer = new ArrayList<>();
     private ArrayList <Monster> listMonster = new ArrayList<>();
     private ArrayList <Artefact> listArtefact = new ArrayList<>();
+
+    public ArrayList<Portal> getListPortal() {
+        return listPortal;
+    }
+
+    public void setListPortal(ArrayList<Portal> listPortal) {
+        this.listPortal = listPortal;
+    }
+
+    private ArrayList <Portal> listPortal = new ArrayList<>();
 
     public ArrayList<Potion> getListPotion() {
         return listPotion;
@@ -407,4 +418,20 @@ public class Grille {
     }
 
 
+    public void addPortailList(Portal portail) {
+        getListPortal().add(portail);
+    }
+
+    public boolean isInSalle(int posX,int posY) { return grille[posY][posX].equals(getSymbolSalle()); }
+    public boolean isInCouloir(int posX,int posY) { return grille[posY][posX].equals(getSymbolCouloir()); }
+
+    public boolean isInsSalleGauche(Position position) {return isInSalle(new Position(position.getX()-1,position.getY()));}
+    public boolean isInsSalleDroite(Position position) {return isInSalle(new Position(position.getX()+1,position.getY()));}
+    public boolean isInsSalleHaut(Position position) {return isInSalle(new Position(position.getX(),position.getY()-1));}
+    public boolean isInsSalleBas(Position position) {return isInSalle(new Position(position.getX(),position.getY()+1));}
+
+    public boolean isInsCouloirGauche(Position position) {return isInCouloir(new Position(position.getX()-1,position.getY()));}
+    public boolean isInsCouloirDroite(Position position) {return isInCouloir(new Position(position.getX()+1,position.getY()));}
+    public boolean isInsCouloirHaut(Position position) {return isInCouloir(new Position(position.getX(),position.getY()-1));}
+    public boolean isInsCouloirBas(Position position) {return isInCouloir(new Position(position.getX(),position.getY()+1));}
 }
