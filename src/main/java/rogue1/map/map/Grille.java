@@ -34,6 +34,10 @@ public class Grille {
         grille[(int)position.getY()][(int)position.getX()] = "* ";
     }
 
+    public void addElement(Position position, String symbole) {
+        grille[(int)position.getY()][(int)position.getX()] = symbole;
+    }
+
     public void addSalle(Salle salle){
         listOfSalle.add(salle);
         Position position = new Position(0, 0);
@@ -124,10 +128,10 @@ public class Grille {
     public String getSymbolCouloir(){
         return "# ";
     }
-
     public String getSymbolGrille() {
         return EMPTYSTRING;
     }
+
     public boolean isInSalle(Position position)
         { return grille[(int)position.getY()][(int)position.getX()].equals(getSymbolSalle()); }
 
@@ -146,10 +150,6 @@ public class Grille {
     public void addEntite(Monster monster) {
         grille[(int)monster.getPosition().getY()][(int)monster.getPosition().getX()] = monster.getSymbol();
         listMonster.add(monster);
-    }
-
-    public void addElement(Position position, String symbole) {
-        grille[(int)position.getY()][(int)position.getX()] = symbole;
     }
 
     public void relierSalle(Grille grille) {

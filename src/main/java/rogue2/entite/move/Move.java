@@ -8,40 +8,46 @@ public class Move {
     public static void moveDown(Grille grille, Player player){
         double x = player.getPosition().getX();
         double y = player.getPosition().getY();
-        System.out.println("pos joueur \nx: " + x + "\ty: " + y);
         Position position = new Position(x, y + 1);
-        System.out.println("pos supposé \nx: " + position.getX() + "\ty: " + position.getY());
-        boolean canMove = isInsSDown(position, grille);
-        System.out.println(canMove);
-        if (canMove){
-            grille.addPoint(player.getPosition());
-            //grille.addElement(position, grille.getSymbolSalle());
-            player.setPosition(position);
-            System.out.println("pos changé \nx: " + position.getX() + "\ty: " + position.getY());
-
-            grille.addEntite(player);
-        }
-            /*grille.addElement(pos, grille.getSymbolSalle());
-            pos.setY((int)pos.getY() + 1);
-            player.setPosition(pos);
-            grille.addEntite(player);*/
-
+        move(grille, player, position);
     }
 
-    public static void moveUp(Grille grille){
-
+    public static void moveUp(Grille grille, Player player){
+        double x = player.getPosition().getX();
+        double y = player.getPosition().getY();
+        Position position = new Position(x, y - 1);
+        move(grille, player, position);
     }
 
-    public static void moveLeft(Grille grille){
-
+    public static void moveLeft(Grille grille, Player player){
+        double x = player.getPosition().getX();
+        double y = player.getPosition().getY();
+        Position position = new Position(x - 1, y);
+        move(grille, player, position);
     }
 
-    public static void moveRight(Grille grille){
-
+    public static void moveRight(Grille grille, Player player){
+        double x = player.getPosition().getX();
+        double y = player.getPosition().getY();
+        Position position = new Position(x + 1, y);
+        move(grille, player, position);
     }
 
     private boolean checkMap(Grille grille){
         return false;
+    }
+
+    private static void move(Grille grille, Player player, Position position){
+        Position pos = position;
+        boolean canMove = isInsSDown(pos, grille);
+        System.out.println(canMove);
+        if (canMove){
+            grille.addPoint(player.getPosition());
+            //grille.addElement(position, grille.getSymbolSalle()); ne fonctionne pas
+            player.setPosition(pos);
+            System.out.println("pos changé \nx: " + pos.getX() + "\ty: " + pos.getY());
+            grille.addEntite(player);
+        }
     }
 
     /*
