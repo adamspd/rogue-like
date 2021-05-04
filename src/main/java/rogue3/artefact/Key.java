@@ -1,4 +1,8 @@
 package rogue3.artefact;
 
-public class Key {
+import rogue0.utils.Position;
+public class Key extends abstractArtefact {
+    public Key(Position position,String symbol) {
+        super(position, "K ");
+    }
 }

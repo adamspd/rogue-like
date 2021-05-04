@@ -1,4 +1,8 @@
 package rogue3.artefact;
 
-public class Portal {
+import rogue0.utils.Position;
+public class Portal extends abstractArtefact{
+    public Portal(Position position,String symbol) {
+        super(position, "P ");
+    }
 }

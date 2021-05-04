@@ -12,4 +12,6 @@ public interface Entity {
     double getMovement();
     int getDamages();
     boolean isAlive();
+    int getReserveHitpoints();
+    void setReserveHitpoints(int ReserveHitpoints);
 }

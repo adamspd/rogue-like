@@ -1,4 +1,10 @@
 package rogue3.artefact;
 
-public class Event {
+import rogue0.utils.Position;
+import java.lang.String;
+
+public class Event extends abstractArtefact {
+    public Event(Position position, String symbol) {
+        super(position, "£ ");
+    }
 }

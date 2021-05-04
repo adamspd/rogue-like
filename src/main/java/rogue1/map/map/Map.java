@@ -14,6 +14,7 @@ public class Map {
         grille.relierSalle(grille);
         addPlayer(grille);
         grille.initialiseMonstre(grille);
+        grille.initialiseArtefact(grille);
         return grille;
     }
 

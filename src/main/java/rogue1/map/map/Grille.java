@@ -4,6 +4,8 @@ import rogue0.utils.Utils;
 import rogue2.entite.monstre.Monster;
 import rogue2.entite.monstre.MonsterFactory;
 import rogue2.entite.player.Player;
+import rogue3.artefact.Artefact;
+import rogue3.artefact.ArtefactFactory;
 
 import java.util.ArrayList;
 
@@ -21,6 +23,10 @@ public class Grille {
     private ArrayList<Salle> listOfSalle = new ArrayList<>();
     private ArrayList <Player> listPlayer = new ArrayList<>();
     private ArrayList <Monster> listMonster = new ArrayList<>();
+
+
+
+    private ArrayList <Artefact> listArtefact = new ArrayList<>();
 
     public Grille(){
         for (int i = 0 ; i < getLength(); i++) {
@@ -149,6 +155,9 @@ public class Grille {
     public ArrayList<Player> getListePlayer() {
         return listPlayer;
     }
+    public ArrayList<Artefact> getListArtefact() {
+        return listArtefact;
+    }
 
     public void addEntite(Player player) {
         grille[(int)player.getPosition().getY()][(int)player.getPosition().getX()] = player.getSymbol();
@@ -159,7 +168,10 @@ public class Grille {
         grille[(int)monster.getPosition().getY()][(int)monster.getPosition().getX()] = monster.getSymbol();
         listMonster.add(monster);
     }
-
+    public void addEntite(Artefact artefact) {
+        grille[(int)artefact.getPosition().getY()][(int)artefact.getPosition().getX()] = artefact.getSymbol();
+        listArtefact.add(artefact);
+    }
     public void relierSalle(Grille grille) {
         ArrayList<Salle> listeSalle = getListOfSalle();
         Couloir[] tabCouloir = new Couloir[listeSalle.size()];
@@ -206,6 +218,45 @@ public class Grille {
                     } else {
                         Monster monster = factory.generate(coord.remove(0), "rogue");
                         grille.addEntite(monster);
+                    }
+
+                }
+            }
+        }
+    }
+    public void initialiseArtefact(Grille grille){
+        Player player = getListePlayer().get(0);
+        ArrayList<Salle> listeSalle = grille.getListOfSalle();
+
+        for (Salle salle : listeSalle) {
+            final int maxMonster = 4;
+            final int distancePlayerMonster = 2;
+            int choixNombreDeMonstre = (int) (Math.random() * (maxMonster + 1));
+            ArrayList<Position> coord = initialiseEntite(grille, choixNombreDeMonstre, salle, player, distancePlayerMonster);
+
+            if (coord.size() != 0) {
+               ArtefactFactory factory = ArtefactFactory.getInstance();
+                while (coord.size() != 0) {
+                    int choix = Utils.randInt(3);
+                    if (choix == 0){
+                        Artefact artefact = factory.generate(coord.remove(0), "¤ ");
+                        grille.addEntite(artefact);
+                    } else if (choix == 1){
+                        Artefact artefact = factory.generate(coord.remove(0), "K ");
+                        grille.addEntite(artefact);
+
+                    }
+                    else if (choix == 2) {
+                        Artefact artefact = factory.generate(coord.remove(0), "! ");
+                        grille.addEntite(artefact);
+                    }
+                    else if (choix == 3) {
+                        Artefact artefact = factory.generate(coord.remove(0), "£ ");
+                        grille.addEntite(artefact);
+                    }
+                    else {
+                     Artefact artefact = factory.generate(coord.remove(0), "P ");
+                        grille.addEntite(artefact);
                     }
 
                 }
