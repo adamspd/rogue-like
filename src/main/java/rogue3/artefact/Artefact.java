@@ -1,9 +1,10 @@
 package rogue3.artefact;
 
 import rogue0.utils.Position;
+import rogue1.map.map.Grille;
 
 public interface Artefact {
      Position getPosition();
      String getSymbol();
-    //void effect(PlayerInterface player);
+    void effect(Grille grille,Position position);
 }

@@ -6,6 +6,7 @@ import rogue2.entite.monstre.MonsterFactory;
 import rogue2.entite.player.Player;
 import rogue3.artefact.Artefact;
 import rogue3.artefact.ArtefactFactory;
+import rogue3.artefact.Potion;
 
 import java.util.ArrayList;
 
@@ -23,11 +24,17 @@ public class Grille {
     private ArrayList<Salle> listOfSalle = new ArrayList<>();
     private ArrayList <Player> listPlayer = new ArrayList<>();
     private ArrayList <Monster> listMonster = new ArrayList<>();
-
-
-
     private ArrayList <Artefact> listArtefact = new ArrayList<>();
 
+    public ArrayList<Potion> getListPotion() {
+        return listPotion;
+    }
+
+    public void setListPotion(ArrayList<Potion> listPotion) {
+        this.listPotion = listPotion;
+    }
+
+    private ArrayList <Potion> listPotion = new ArrayList<>();
     public Grille(){
         for (int i = 0 ; i < getLength(); i++) {
             for (int j = 0; j < getWidth(); j++) {
