@@ -18,9 +18,9 @@ public class Grille {
     private final int ESPACE_MINIMUM_SALLE_Y = 5;
     private final int ESPACE_MAXIMUM_SALLE_X = 10;
     private final int ESPACE_MAXIMUM_SALLE_Y = 12;
-    private ArrayList<Salle> listOfSalle = new ArrayList<Salle>();
-    private ArrayList <Player> listPlayer = new ArrayList<Player>();
-    private ArrayList <Monster> listMonster = new ArrayList<Monster>();
+    private ArrayList<Salle> listOfSalle = new ArrayList<>();
+    private ArrayList <Player> listPlayer = new ArrayList<>();
+    private ArrayList <Monster> listMonster = new ArrayList<>();
 
     public Grille(){
         for (int i = 0 ; i < getLength(); i++) {
@@ -59,7 +59,7 @@ public class Grille {
     public Salle generateSalles(Grille grille) {
         int salleLenght =(int) (ESPACE_MINIMUM_SALLE_Y + Math.random() * (ESPACE_MAXIMUM_SALLE_Y - ESPACE_MINIMUM_SALLE_Y));
         int salleWidth = (int) (ESPACE_MINIMUM_SALLE_X + Math.random() * (ESPACE_MAXIMUM_SALLE_X - ESPACE_MINIMUM_SALLE_X));
-        int randoms[] = new int[2];
+        int[] randoms = new int[2];
         while (true){
             int y = (int) ((Math.random() * grille.getLength()) - salleWidth);
             int x = (int) ((Math.random() * grille.getWidth()) - salleWidth);
@@ -126,10 +126,6 @@ public class Grille {
     }
     public boolean isInSalle(Position position) { return grille[(int)position.getY()][(int)position.getX()].equals(getSymbolSalle()); }
 
-    public void addPlayerList(Player player)
-    {
-        listPlayer.add(player);
-    }
 
     public ArrayList<Player> getListePlayer() {
         return listPlayer;
@@ -217,7 +213,7 @@ public class Grille {
 
     public static ArrayList<Position> initialiseEntite(
             Grille grille, int choix, Salle salle, Player player, int distancePlayerMonster) {
-        ArrayList<Position> tab = new ArrayList<Position>();
+        ArrayList<Position> tab = new ArrayList<>();
         for(int a = 0 ; a < choix; a++) {
             int[] coord = Utils.getRandomCoordSalle(salle);
             double coordSalleRandomX = coord[0];
@@ -227,7 +223,7 @@ public class Grille {
             boolean isEnoughFarPlayer = Utils.estAssezLoinDuJoueur(
                     position, distancePlayerMonster, grille, player
             );
-            while (! grille.isInSalle(position) && isEnoughFarPlayer == false) {
+            while (! grille.isInSalle(position) && !isEnoughFarPlayer) {
                 coord = Utils.getRandomCoordSalle(salle);
                 coordSalleRandomX = coord[0];
                 coordSalleRandomY = coord[1];
