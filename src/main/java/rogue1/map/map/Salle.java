@@ -1,16 +1,16 @@
 package rogue1.map.map;
-import rogue0.utils.Pos;
+import rogue0.utils.Position;
 
 public class Salle {
     private final String roomText = "* ";
     private final int salleLenght;
     private final int salleWidth;
-    private Pos pos;
+    private Position position;
 
-    public Salle(int roomLenght, int roomWitdth, Pos pos){
+    public Salle(int roomLenght, int roomWitdth, Position position){
         this.salleWidth = roomWitdth;
         this.salleLenght = roomLenght;
-        this.pos = pos;
+        this.position = position;
 
     }
 
@@ -26,8 +26,8 @@ public class Salle {
         return salleWidth;
     }
 
-    public Pos getPos() {
-        return pos;
+    public Position getPos() {
+        return position;
     }
 
     /**
@@ -36,8 +36,8 @@ public class Salle {
      */
     public int[] getMiddleSalle() {
         int tabPosMiddle[] = new int[2];
-        tabPosMiddle[0] = (salleWidth / 2) + pos.getX();
-        tabPosMiddle[1] = (salleLenght / 2) + pos.getY();
+        tabPosMiddle[0] = (salleWidth / 2) + (int) position.getX();
+        tabPosMiddle[1] = (salleLenght / 2) + (int) position.getY();
         return tabPosMiddle;
     }
 

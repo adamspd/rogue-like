@@ -1,15 +1,15 @@
 package rogue2.entite;
-import rogue0.utils.Pos;
+import rogue0.utils.Position;
 import rogue1.map.map.Grille;
 
 
 public abstract class EntiteAbstrait {
     private static String symbole;
-    private Pos pos;
+    private Position position;
 
-    public EntiteAbstrait(String symbole, Pos pos){
+    public EntiteAbstrait(String symbole, Position position){
         this.symbole = symbole;
-        this.pos = pos;
+        this.position = position;
     }
 
     public abstract void addSpecificEntiteList(Grille grille);
@@ -20,12 +20,12 @@ public abstract class EntiteAbstrait {
         this.symbole = symbole;
     }
 
-    public Pos getPos() {
-        return pos;
+    public Position getPos() {
+        return position;
     }
 
-    public void setPos(Pos pos) {
-        this.pos = pos;
+    public void setPos(Position position) {
+        this.position = position;
     }
 
 

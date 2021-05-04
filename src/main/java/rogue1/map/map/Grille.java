@@ -1,19 +1,19 @@
 package rogue1.map.map;
-import rogue0.utils.Pos;
-import rogue0.utils.Union;
+import rogue0.utils.Position;
 import rogue0.utils.Utils;
-import rogue2.entite.EntiteAbstrait;
-import rogue2.entite.Joueur;
+import rogue2.entite.*;
+import rogue2.entite.monstre.Monster;
+import rogue2.entite.monstre.MonsterFactory;
 
 import java.util.ArrayList;
 
 public class Grille {
     private final int Length = 30;
-    private final int width = 60;
-    private String EMPTYSTRING = ". ";
+    private final int width = 80;
+    private String EMPTYSTRING = "  ";
     private String[][] grille = new String[Length][width];
     private final int ESPACE_MINIMUM_ENTRE_SALLE = 4;
-    private int nombreSalle = Utils.randInt(3, 5);
+    private int nombreSalle = Utils.randInt(3, 6);
     private final int ESPACE_MINIMUM_SALLE_X = 4;
     private final int ESPACE_MINIMUM_SALLE_Y = 5;
     private final int ESPACE_MAXIMUM_SALLE_X = 10;
@@ -21,6 +21,7 @@ public class Grille {
     private ArrayList<Salle> listOfSalle = new ArrayList<Salle>();
     private ArrayList <EntiteAbstrait> listeEntite = new ArrayList<EntiteAbstrait>();
     private ArrayList <Joueur> listeJoueur = new ArrayList<Joueur>();
+    private ArrayList <Monster> listMonster = new ArrayList<Monster>();
 
     public Grille(){
         for (int i = 0 ; i < getLength(); i++) {
@@ -30,17 +31,17 @@ public class Grille {
         }
     }
 
-    public void addPoint(Pos pos){
-        grille[pos.getY()][pos.getX()] = "* ";
+    public void addPoint(Position position){
+        grille[(int)position.getY()][(int)position.getX()] = "* ";
     }
 
     public void addSalle(Salle salle){
         listOfSalle.add(salle);
-        Pos pos = new Pos(0, 0);
+        Position position = new Position(0, 0);
         for (int i=0; i<salle.getSalleWidth(); i++){
             for (int j=0; j<salle.getSalleLenght(); j++){
-                pos.setPos(salle.getPos().getX() + i, salle.getPos().getY() + j);
-                addPoint(pos);
+                position.setPos((int)salle.getPos().getX() + i, (int) salle.getPos().getY() + j);
+                addPoint(position);
             }
         }
     }
@@ -69,24 +70,24 @@ public class Grille {
                 break;
             }
         }
-        Salle salle = new Salle(salleLenght, salleWidth, new Pos(randoms[0], randoms[1]));
+        Salle salle = new Salle(salleLenght, salleWidth, new Position(randoms[0], randoms[1]));
         /*System.out.println("longeur: " + salleLenght + "\tlargeur: " + salleWidth);
         System.out.println(randoms[0]);
         System.out.println(randoms[1]);*/
         return salle;
     }
 
-    public boolean isEnoughFar(Salle salle, Pos pos) {
+    public boolean isEnoughFar(Salle salle, Position position) {
         try {
-            for (int i = pos.getX()-ESPACE_MINIMUM_ENTRE_SALLE;
-                 i < salle.getSalleWidth()+ESPACE_MINIMUM_ENTRE_SALLE+ pos.getX();
+            for (int i = (int) position.getX()-ESPACE_MINIMUM_ENTRE_SALLE;
+                 i < salle.getSalleWidth()+ESPACE_MINIMUM_ENTRE_SALLE+ position.getX();
                  i++)
             {
-                for (int j = pos.getY() -ESPACE_MINIMUM_ENTRE_SALLE;
-                     j < salle.getSalleLenght()+ESPACE_MINIMUM_ENTRE_SALLE+ pos.getY();
+                for (int j = (int) position.getY() -ESPACE_MINIMUM_ENTRE_SALLE;
+                     j < salle.getSalleLenght()+ESPACE_MINIMUM_ENTRE_SALLE+ position.getY();
                      j++)
                 {
-                    if(isInSalle(new Pos(i, j))) {
+                    if(isInSalle(new Position(i, j))) {
                         return false;
                     }
                 }
@@ -105,8 +106,8 @@ public class Grille {
         return listOfSalle;
     }
 
-    public String getSymbolAtCoord(Pos pos) {
-        return grille[pos.getX()][pos.getY()];
+    public String getSymbolAtCoord(Position position) {
+        return grille[(int)position.getX()][(int)position.getY()];
     }
 
     public int getLength() {
@@ -124,11 +125,15 @@ public class Grille {
     public String getSymbolGrille() {
         return EMPTYSTRING;
     }
-    public boolean isInSalle(Pos pos) { return grille[pos.getY()][pos.getX()].equals(getSymbolSalle()); }
+    public boolean isInSalle(Position position) { return grille[(int)position.getY()][(int)position.getX()].equals(getSymbolSalle()); }
 
     public void addJoueurList(Joueur joueur)
     {
         listeJoueur.add(joueur);
+    }
+
+    public ArrayList<Joueur> getListeJoueur() {
+        return listeJoueur;
     }
 
     /*public void linkSalle(Grille grille){
@@ -147,9 +152,14 @@ public class Grille {
     } */
 
     public void addEntite(EntiteAbstrait entite) {
-        grille[entite.getPos().getY()][entite.getPos().getX()] = entite.getSymbole();
+        grille[(int)entite.getPos().getY()][(int)entite.getPos().getX()] = entite.getSymbole();
         listeEntite.add(entite);
         entite.addSpecificEntiteList(this);
+    }
+
+    public void addEntite(Monster monster) {
+        grille[(int)monster.getPosition().getY()][(int)monster.getPosition().getX()] = monster.getSymbol();
+        listMonster.add(monster);
     }
 
     public void relierSalle(Grille grille) {
@@ -175,6 +185,64 @@ public class Grille {
         }
     }
 
+    public void initialiseMonstre(Grille grille){
+        Joueur joueur = getListeJoueur().get(0);
+        ArrayList<Salle> listeSalle = grille.getListOfSalle();
+
+        for (Salle salle : listeSalle) {
+            final int maxMonster = 2;
+            final int distancePlayerMonster = 2;
+            int choixNombreDeMonstre = (int) (Math.random() * (maxMonster + 1));
+            ArrayList<Position> coord = initialiseEntite(grille, choixNombreDeMonstre, salle, joueur, distancePlayerMonster);
+            //Potion potion;
+
+
+            if (coord.size() != 0) {
+                MonsterFactory factory = MonsterFactory.getInstance();
+                while (coord.size() != 0) {
+                    int choix = Utils.randInt(3);
+                    if (choix == 0){
+                        Monster monster = factory.generate(coord.remove(0), "goblin_archer");
+                        grille.addEntite(monster);
+                    } else if (choix == 1){
+                        Monster monster = factory.generate(coord.remove(0), "orc_warrior");
+                        grille.addEntite(monster);
+                    } else {
+                        Monster monster = factory.generate(coord.remove(0), "rogue");
+                        grille.addEntite(monster);
+                    }
+
+                }
+            }
+        }
+    }
+
+    public static ArrayList<Position> initialiseEntite(
+            Grille grille, int choix, Salle salle, Joueur joueur, int distancePlayerMonster) {
+        ArrayList<Position> tab = new ArrayList<Position>();
+        for(int a = 0 ; a < choix; a++) {
+            int[] coord = Utils.getRandomCoordSalle(salle);
+            double coordSalleRandomX = coord[0];
+            double coordSalleRandomY = coord[1];
+            Position position = new Position(coordSalleRandomX, coordSalleRandomY);
+
+            boolean isEnoughFarJoueur = Utils.estAssezLoinDuJoueur(
+                    position, distancePlayerMonster, grille, joueur
+            );
+            while (! grille.isInSalle(position) && isEnoughFarJoueur == false) {
+                coord = Utils.getRandomCoordSalle(salle);
+                coordSalleRandomX = coord[0];
+                coordSalleRandomY = coord[1];
+                position.setPos(coordSalleRandomX, coordSalleRandomY);
+                isEnoughFarJoueur = Utils.estAssezLoinDuJoueur(
+                        position, distancePlayerMonster, grille, joueur
+                );
+            }
+            tab.add(position);
+        }
+        return tab;
+    }
+
     private void ajoutCouloirGrille(Couloir couloir,Grille grille) {
         String symboleCouloir = couloir.getSYMBOLE();
         int[] salle1Coord = couloir.getCoordDepart();
@@ -192,7 +260,7 @@ public class Grille {
         if(choixDepart==0) {
             if(salle1X<salle2X) {
                 for(int i = salle1X; i < salle2X;i++) {
-                    if(! grille.isInSalle(new Pos(i,salle1Y))) {
+                    if(! grille.isInSalle(new Position(i,salle1Y))) {
                         grille.getGrille()[salle1Y][i]= symboleCouloir;
                     }
                 }
@@ -201,7 +269,7 @@ public class Grille {
             {
                 for(int i = salle1X; i > salle2X;i--)
                 {
-                    if(! grille.isInSalle(new Pos(i,salle1Y)))
+                    if(! grille.isInSalle(new Position(i,salle1Y)))
                     {
 
                         grille.getGrille()[salle1Y][i]= symboleCouloir;
@@ -213,7 +281,7 @@ public class Grille {
             {
                 for(int i = salle1Y; i < salle2Y;i++)
                 {
-                    if(! grille.isInSalle(new Pos(salle2X,i)))
+                    if(! grille.isInSalle(new Position(salle2X,i)))
                     {
 
                         grille.getGrille()[i][salle2X]= symboleCouloir;
@@ -229,7 +297,7 @@ public class Grille {
             {
                 for(int i = salle1Y; i > salle2Y;i--)
                 {
-                    if(! grille.isInSalle(new Pos(salle2X,i)))
+                    if(! grille.isInSalle(new Position(salle2X,i)))
                     {
                         grille.getGrille()[i][salle2X]= symboleCouloir;
                     }
@@ -243,7 +311,7 @@ public class Grille {
             {
                 for(int i = salle1Y; i < salle2Y;i++)
                 {
-                    if(! grille.isInSalle(new Pos(salle1X,i)))
+                    if(! grille.isInSalle(new Position(salle1X,i)))
                     {
                         grille.getGrille()[i][salle1X]= symboleCouloir;
                     }
@@ -253,7 +321,7 @@ public class Grille {
             {
                 for(int i = salle1Y; i > salle2Y;i--)
                 {
-                    if(! grille.isInSalle(new Pos(salle1X,i)))
+                    if(! grille.isInSalle(new Position(salle1X,i)))
                     {
                         grille.getGrille()[i][salle1X]= symboleCouloir;
                     }
@@ -263,7 +331,7 @@ public class Grille {
             {
                 for(int i = salle1X; i < salle2X;i++)
                 {
-                    if(! grille.isInSalle(new Pos(i,salle2Y)))
+                    if(! grille.isInSalle(new Position(i,salle2Y)))
                     {
                         grille.getGrille()[salle2Y][i]= symboleCouloir;
                     }
@@ -273,7 +341,7 @@ public class Grille {
             {
                 for(int i = salle1X; i > salle2X;i--)
                 {
-                    if(! grille.isInSalle(new Pos(i,salle2Y)))
+                    if(! grille.isInSalle(new Position(i,salle2Y)))
                     {
                         grille.getGrille()[salle2Y][i]= symboleCouloir;
                     }

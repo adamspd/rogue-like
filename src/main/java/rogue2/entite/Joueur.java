@@ -1,5 +1,5 @@
 package rogue2.entite;
-import rogue0.utils.Pos;
+import rogue0.utils.Position;
 import rogue1.map.map.Grille;
 
 
@@ -8,8 +8,8 @@ public class Joueur extends EntiteAbstrait{
     private int degat = 15;
     private int potionReserve = 0;
 
-    public Joueur(Pos pos) {
-        super("@ ", pos);
+    public Joueur(Position position) {
+        super("@ ", position);
     }
 
     @Override

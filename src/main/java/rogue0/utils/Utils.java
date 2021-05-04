@@ -8,19 +8,19 @@ import java.util.Random;
 public class Utils {
     /**
      *
-     * @param pos
+     * @param position
      * @param distanceMin
      * @param grille
      * @param joueur
      * @return a boolean telling if a position is far enough the player
      */
-    public boolean estAssezLoinDuJoueur(Pos pos, int distanceMin, Grille grille, Joueur joueur){
+    public static boolean estAssezLoinDuJoueur(Position position, int distanceMin, Grille grille, Joueur joueur){
         boolean isEnoughFar = true;
         try{
-            for (int j = pos.getY() - distanceMin; j <= pos.getY() + distanceMin; j++){
-                for (int i = pos.getX() - distanceMin; i <= pos.getX() + distanceMin; i++){
-                    Pos pos1 = new Pos(i, j);
-                    if(grille.getSymbolAtCoord(pos1).equals(joueur.getSymbole())){
+            for (int j = (int) position.getY() - distanceMin; j <= position.getY() + distanceMin; j++){
+                for (int i = (int) position.getX() - distanceMin; i <= position.getX() + distanceMin; i++){
+                    Position position1 = new Position(i, j);
+                    if(grille.getSymbolAtCoord(position1).equals(joueur.getSymbole())){
                         isEnoughFar = false;
                     }
                 }
@@ -29,16 +29,17 @@ public class Utils {
         return isEnoughFar;
     }
 
+
     /**
      * Fonction à refaire
      * @param salle
      * @return an Array of 2 numbers (integer) containing random coord in a specific room
      */
-    public int[] getRandomCoordSalle(Salle salle){
+    public static int[] getRandomCoordSalle(Salle salle){
         int[] randomCoord = new int[2];
-        Pos pos = salle.getPos();
-        int minX = pos.getX();;
-        int minY = pos.getY();
+        Position position = salle.getPos();
+        int minX = (int) position.getX();;
+        int minY = (int) position.getY();
         int maxX = salle.getSalleWidth() + minX;
         int maxY = salle.getSalleLenght() + minY;
         int coordRandomX = randInt(minX, maxX);
