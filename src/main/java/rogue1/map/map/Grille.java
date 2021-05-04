@@ -106,7 +106,7 @@ public class Grille {
     }
 
     public String getSymbolAtCoord(Position position) {
-        return grille[(int)position.getX()][(int)position.getY()];
+        return grille[(int)position.getY()][(int)position.getX()];
     }
 
     public int getLength() {
@@ -121,11 +121,18 @@ public class Grille {
         return "* ";
     }
 
+    public String getSymbolCouloir(){
+        return "# ";
+    }
+
     public String getSymbolGrille() {
         return EMPTYSTRING;
     }
-    public boolean isInSalle(Position position) { return grille[(int)position.getY()][(int)position.getX()].equals(getSymbolSalle()); }
+    public boolean isInSalle(Position position)
+        { return grille[(int)position.getY()][(int)position.getX()].equals(getSymbolSalle()); }
 
+    public boolean isInCouloir(Position position)
+        { return grille[(int)position.getY()][(int)position.getX()].equals(getSymbolCouloir()); }
 
     public ArrayList<Player> getListePlayer() {
         return listPlayer;
@@ -154,6 +161,10 @@ public class Grille {
     public void addEntite(Monster monster) {
         grille[(int)monster.getPosition().getY()][(int)monster.getPosition().getX()] = monster.getSymbol();
         listMonster.add(monster);
+    }
+
+    public void addElement(Position position, String symbole) {
+        grille[(int)position.getY()][(int)position.getX()] = symbole;
     }
 
     public void relierSalle(Grille grille) {
@@ -188,8 +199,6 @@ public class Grille {
             final int distancePlayerMonster = 2;
             int choixNombreDeMonstre = (int) (Math.random() * (maxMonster + 1));
             ArrayList<Position> coord = initialiseEntite(grille, choixNombreDeMonstre, salle, player, distancePlayerMonster);
-            //Potion potion;
-
 
             if (coord.size() != 0) {
                 MonsterFactory factory = MonsterFactory.getInstance();
@@ -210,6 +219,7 @@ public class Grille {
             }
         }
     }
+
 
     public static ArrayList<Position> initialiseEntite(
             Grille grille, int choix, Salle salle, Player player, int distancePlayerMonster) {
@@ -344,4 +354,6 @@ public class Grille {
         }
 
     }
+
+
 }

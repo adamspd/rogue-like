@@ -55,4 +55,9 @@ public class Position {
         X = posX;
         Y = posY;
     }
+
+    public void setPos(Position pos) {
+        X = pos.X;
+        Y = pos.Y;
+    }
 }
