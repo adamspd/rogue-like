@@ -1,9 +1,9 @@
 package rogue1.map.map;
 import rogue0.utils.Position;
 import rogue0.utils.Utils;
-import rogue2.entite.*;
 import rogue2.entite.monstre.Monster;
 import rogue2.entite.monstre.MonsterFactory;
+import rogue2.entite.player.Player;
 
 import java.util.ArrayList;
 
@@ -19,8 +19,7 @@ public class Grille {
     private final int ESPACE_MAXIMUM_SALLE_X = 10;
     private final int ESPACE_MAXIMUM_SALLE_Y = 12;
     private ArrayList<Salle> listOfSalle = new ArrayList<Salle>();
-    private ArrayList <EntiteAbstrait> listeEntite = new ArrayList<EntiteAbstrait>();
-    private ArrayList <Joueur> listeJoueur = new ArrayList<Joueur>();
+    private ArrayList <Player> listPlayer = new ArrayList<Player>();
     private ArrayList <Monster> listMonster = new ArrayList<Monster>();
 
     public Grille(){
@@ -127,13 +126,13 @@ public class Grille {
     }
     public boolean isInSalle(Position position) { return grille[(int)position.getY()][(int)position.getX()].equals(getSymbolSalle()); }
 
-    public void addJoueurList(Joueur joueur)
+    public void addPlayerList(Player player)
     {
-        listeJoueur.add(joueur);
+        listPlayer.add(player);
     }
 
-    public ArrayList<Joueur> getListeJoueur() {
-        return listeJoueur;
+    public ArrayList<Player> getListePlayer() {
+        return listPlayer;
     }
 
     /*public void linkSalle(Grille grille){
@@ -151,10 +150,9 @@ public class Grille {
         }
     } */
 
-    public void addEntite(EntiteAbstrait entite) {
-        grille[(int)entite.getPos().getY()][(int)entite.getPos().getX()] = entite.getSymbole();
-        listeEntite.add(entite);
-        entite.addSpecificEntiteList(this);
+    public void addEntite(Player player) {
+        grille[(int)player.getPosition().getY()][(int)player.getPosition().getX()] = player.getSymbol();
+        listPlayer.add(player);
     }
 
     public void addEntite(Monster monster) {
@@ -186,14 +184,14 @@ public class Grille {
     }
 
     public void initialiseMonstre(Grille grille){
-        Joueur joueur = getListeJoueur().get(0);
+        Player player = getListePlayer().get(0);
         ArrayList<Salle> listeSalle = grille.getListOfSalle();
 
         for (Salle salle : listeSalle) {
-            final int maxMonster = 2;
+            final int maxMonster = 3;
             final int distancePlayerMonster = 2;
             int choixNombreDeMonstre = (int) (Math.random() * (maxMonster + 1));
-            ArrayList<Position> coord = initialiseEntite(grille, choixNombreDeMonstre, salle, joueur, distancePlayerMonster);
+            ArrayList<Position> coord = initialiseEntite(grille, choixNombreDeMonstre, salle, player, distancePlayerMonster);
             //Potion potion;
 
 
@@ -218,7 +216,7 @@ public class Grille {
     }
 
     public static ArrayList<Position> initialiseEntite(
-            Grille grille, int choix, Salle salle, Joueur joueur, int distancePlayerMonster) {
+            Grille grille, int choix, Salle salle, Player player, int distancePlayerMonster) {
         ArrayList<Position> tab = new ArrayList<Position>();
         for(int a = 0 ; a < choix; a++) {
             int[] coord = Utils.getRandomCoordSalle(salle);
@@ -226,16 +224,16 @@ public class Grille {
             double coordSalleRandomY = coord[1];
             Position position = new Position(coordSalleRandomX, coordSalleRandomY);
 
-            boolean isEnoughFarJoueur = Utils.estAssezLoinDuJoueur(
-                    position, distancePlayerMonster, grille, joueur
+            boolean isEnoughFarPlayer = Utils.estAssezLoinDuJoueur(
+                    position, distancePlayerMonster, grille, player
             );
-            while (! grille.isInSalle(position) && isEnoughFarJoueur == false) {
+            while (! grille.isInSalle(position) && isEnoughFarPlayer == false) {
                 coord = Utils.getRandomCoordSalle(salle);
                 coordSalleRandomX = coord[0];
                 coordSalleRandomY = coord[1];
                 position.setPos(coordSalleRandomX, coordSalleRandomY);
-                isEnoughFarJoueur = Utils.estAssezLoinDuJoueur(
-                        position, distancePlayerMonster, grille, joueur
+                isEnoughFarPlayer = Utils.estAssezLoinDuJoueur(
+                        position, distancePlayerMonster, grille, player
                 );
             }
             tab.add(position);

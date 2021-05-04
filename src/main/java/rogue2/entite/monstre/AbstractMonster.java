@@ -2,57 +2,51 @@ package rogue2.entite.monstre;
 
 import rogue0.utils.Position;
 import rogue2.entite.abstrait.AbstractEntity;
-import rogue2.entite.player.Player;
+import rogue2.entite.player.PlayerInterface;
 
 public abstract class  AbstractMonster extends AbstractEntity implements Monster {
-    private final String symbol;
 
     public AbstractMonster(Position position, int hitPoints, double movement, int damages, String symbol) {
-        super(position, hitPoints, movement, damages);
-        this.symbol = symbol;
+        super(position, hitPoints, movement, damages, symbol);
     }
 
-    public void flee(Player player){
+    public void flee(PlayerInterface playerInterface){
         double movement = getMovement();
-        move(player, -movement);
+        move(playerInterface, -movement);
     }
 
-    public boolean moveAway(Player player, double distance){
+    public boolean moveAway(PlayerInterface playerInterface, double distance){
         double movement = getMovement();
-        boolean hasToMove = getDistance(player) < distance;
+        boolean hasToMove = getDistance(playerInterface) < distance;
         if (hasToMove){
-            move(player, -movement);
+            move(playerInterface, -movement);
         }
         return hasToMove;
     }
 
-    private void move(Player player, double distance){
+    private void move(PlayerInterface playerInterface, double distance){
         Position monsterPosition = getPosition();
-        Position playerPosition = player.getPosition();
+        Position playerPosition = playerInterface.getPosition();
         setPosition(monsterPosition.moveToward(playerPosition, -distance));
     }
 
-    private double getDistance(Player player){
+    private double getDistance(PlayerInterface playerInterface){
         Position monsterPosition = getPosition();
-        Position playerPosition = player.getPosition();
+        Position playerPosition = playerInterface.getPosition();
         return monsterPosition.getDistance(playerPosition);
     }
 
-    public boolean engage(Player player){
+    public boolean engage(PlayerInterface playerInterface){
         double movement = getMovement();
-        boolean hasToMove = getDistance(player) > 1;
+        boolean hasToMove = getDistance(playerInterface) > 1;
         if (hasToMove){
-            move(player, movement);
+            move(playerInterface, movement);
         }
         return hasToMove;
     }
 
-    public void attack(Player player){
-        player.setHitPoints(player.getHitPoints() - getDamages());
+    public void attack(PlayerInterface playerInterface){
+        playerInterface.setHitPoints(playerInterface.getHitPoints() - getDamages());
     }
 
-    @Override
-    public String getSymbol() {
-        return symbol;
-    }
 }

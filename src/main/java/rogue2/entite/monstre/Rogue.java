@@ -1,7 +1,7 @@
 package rogue2.entite.monstre;
 
 import rogue0.utils.Position;
-import rogue2.entite.player.Player;
+import rogue2.entite.player.PlayerInterface;
 
 public class Rogue extends AbstractMonster {
     public Rogue(Position position) {
@@ -9,11 +9,11 @@ public class Rogue extends AbstractMonster {
     }
 
     @Override
-    public void act(Player player) {
+    public void act(PlayerInterface playerInterface) {
         if (getHitPoints() <= getMaxHitPoints() / 2){
-            flee(player);
-        } else if (!engage(player)){
-            attack(player);
+            flee(playerInterface);
+        } else if (!engage(playerInterface)){
+            attack(playerInterface);
         }
     }
 }

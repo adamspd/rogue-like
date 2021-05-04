@@ -1,7 +1,7 @@
 package rogue0.utils;
 import rogue1.map.map.Grille;
 import rogue1.map.map.Salle;
-import rogue2.entite.Joueur;
+import rogue2.entite.player.Player;
 
 import java.util.Random;
 
@@ -11,16 +11,16 @@ public class Utils {
      * @param position
      * @param distanceMin
      * @param grille
-     * @param joueur
+     * @param player
      * @return a boolean telling if a position is far enough the player
      */
-    public static boolean estAssezLoinDuJoueur(Position position, int distanceMin, Grille grille, Joueur joueur){
+    public static boolean estAssezLoinDuJoueur(Position position, int distanceMin, Grille grille, Player player){
         boolean isEnoughFar = true;
         try{
             for (int j = (int) position.getY() - distanceMin; j <= position.getY() + distanceMin; j++){
                 for (int i = (int) position.getX() - distanceMin; i <= position.getX() + distanceMin; i++){
                     Position position1 = new Position(i, j);
-                    if(grille.getSymbolAtCoord(position1).equals(joueur.getSymbole())){
+                    if(grille.getSymbolAtCoord(position1).equals(player.getSymbol())){
                         isEnoughFar = false;
                     }
                 }

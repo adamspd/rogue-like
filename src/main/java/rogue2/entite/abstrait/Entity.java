@@ -11,4 +11,5 @@ public interface Entity {
     int getMaxHitPoints();
     double getMovement();
     int getDamages();
+    boolean isAlive();
 }

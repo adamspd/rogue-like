@@ -1,7 +1,7 @@
 package rogue2.entite.monstre;
 
 import rogue0.utils.Position;
-import rogue2.entite.player.Player;
+import rogue2.entite.player.PlayerInterface;
 
 public class OrcWarrior extends AbstractMonster {
     public OrcWarrior(Position position){
@@ -9,9 +9,9 @@ public class OrcWarrior extends AbstractMonster {
     }
 
     @Override
-    public void act(Player player) {
-        if (!engage(player)){
-            attack(player);
+    public void act(PlayerInterface playerInterface) {
+        if (!engage(playerInterface)){
+            attack(playerInterface);
         }
     }
 }

@@ -1,7 +1,7 @@
 package rogue1.map.map;
 
 import rogue0.utils.Position;
-import rogue2.entite.Joueur;
+import rogue2.entite.player.Player;
 
 import java.util.ArrayList;
 
@@ -12,17 +12,17 @@ public class Map {
         Grille grille = new Grille();
         grille.initialiseSalle(grille);
         grille.relierSalle(grille);
-        ajouterJoueur(grille);
+        addPlayer(grille);
         grille.initialiseMonstre(grille);
         return grille;
     }
 
-    private void ajouterJoueur(Grille grille)
+    private void addPlayer(Grille grille)
     {
-        Salle salleJoueur = getSalleDepart(grille.getListOfSalle());
-        int salleJoueurX = (int) salleJoueur.getPos().getX();
-        int salleJoueurY = (int) salleJoueur.getPos().getY();
-        grille.addEntite(new Joueur(new Position(salleJoueurX,salleJoueurY)));
+        Salle sallePlayer = getSalleDepart(grille.getListOfSalle());
+        int sallePlayerX = (int) sallePlayer.getPos().getX();
+        int sallePlayerY = (int) sallePlayer.getPos().getY();
+        grille.addEntite(new Player(new Position(sallePlayerX,sallePlayerY)));
     }
 
     private Salle getSalleDepart(ArrayList<Salle>listSalle)
