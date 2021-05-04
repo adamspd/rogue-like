@@ -34,6 +34,10 @@ public class Grille {
         grille[(int)position.getY()][(int)position.getX()] = "* ";
     }
 
+    public void add(Position position, Object o) {
+        grille[(int) position.getY()][(int) position.getX()] = (String) o;
+    }
+
     public void addElement(Position position, String symbole) {
         grille[(int)position.getY()][(int)position.getX()] = symbole;
     }
