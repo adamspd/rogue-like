@@ -9,9 +9,9 @@ public class OrcWarrior extends AbstractMonster {
     }
 
     @Override
-    public void act(PlayerInterface playerInterface) {
-        if (!engage(playerInterface)){
-            attack(playerInterface);
+    public void act(PlayerInterface player) {
+        if (!engage(player)){
+            attack(player);
         }
     }
 }

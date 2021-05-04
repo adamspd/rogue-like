@@ -9,11 +9,11 @@ public class GoblinArcher extends AbstractMonster {
     }
 
     @Override
-    public void act(PlayerInterface playerInterface) {
+    public void act(PlayerInterface player) {
         if (getHitPoints() < getMaxHitPoints()){
-            flee(playerInterface);
-        } else if (!moveAway(playerInterface, 2)){
-            attack(playerInterface);
+            flee(player);
+        } else if (!moveAway(player, 2)){
+            attack(player);
         }
     }
 }

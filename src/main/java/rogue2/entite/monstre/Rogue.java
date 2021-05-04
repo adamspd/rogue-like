@@ -9,11 +9,11 @@ public class Rogue extends AbstractMonster {
     }
 
     @Override
-    public void act(PlayerInterface playerInterface) {
+    public void act(PlayerInterface player) {
         if (getHitPoints() <= getMaxHitPoints() / 2){
-            flee(playerInterface);
-        } else if (!engage(playerInterface)){
-            attack(playerInterface);
+            flee(player);
+        } else if (!engage(player)){
+            attack(player);
         }
     }
 }

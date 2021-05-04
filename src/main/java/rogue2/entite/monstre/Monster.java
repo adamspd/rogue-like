@@ -5,5 +5,5 @@ import rogue2.entite.player.PlayerInterface;
 
 public interface Monster extends Entity {
     String getSymbol();
-    void act(PlayerInterface playerInterface);
+    void act(PlayerInterface player);
 }

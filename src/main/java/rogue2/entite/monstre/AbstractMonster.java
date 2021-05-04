@@ -10,43 +10,43 @@ public abstract class  AbstractMonster extends AbstractEntity implements Monster
         super(position, hitPoints, movement, damages, symbol);
     }
 
-    public void flee(PlayerInterface playerInterface){
+    public void flee(PlayerInterface player){
         double movement = getMovement();
-        move(playerInterface, -movement);
+        move(player, -movement);
     }
 
-    public boolean moveAway(PlayerInterface playerInterface, double distance){
+    public boolean moveAway(PlayerInterface player, double distance){
         double movement = getMovement();
-        boolean hasToMove = getDistance(playerInterface) < distance;
+        boolean hasToMove = getDistance(player) < distance;
         if (hasToMove){
-            move(playerInterface, -movement);
+            move(player, -movement);
         }
         return hasToMove;
     }
 
-    private void move(PlayerInterface playerInterface, double distance){
+    private void move(PlayerInterface player, double distance){
         Position monsterPosition = getPosition();
-        Position playerPosition = playerInterface.getPosition();
+        Position playerPosition = player.getPosition();
         setPosition(monsterPosition.moveToward(playerPosition, -distance));
     }
 
-    private double getDistance(PlayerInterface playerInterface){
+    private double getDistance(PlayerInterface player){
         Position monsterPosition = getPosition();
-        Position playerPosition = playerInterface.getPosition();
+        Position playerPosition = player.getPosition();
         return monsterPosition.getDistance(playerPosition);
     }
 
-    public boolean engage(PlayerInterface playerInterface){
+    public boolean engage(PlayerInterface player){
         double movement = getMovement();
-        boolean hasToMove = getDistance(playerInterface) > 1;
+        boolean hasToMove = getDistance(player) > 1;
         if (hasToMove){
-            move(playerInterface, movement);
+            move(player, movement);
         }
         return hasToMove;
     }
 
-    public void attack(PlayerInterface playerInterface){
-        playerInterface.setHitPoints(playerInterface.getHitPoints() - getDamages());
+    public void attack(PlayerInterface player){
+        player.setHitPoints(player.getHitPoints() - getDamages());
     }
 
 }
