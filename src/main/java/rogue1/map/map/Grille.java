@@ -138,21 +138,6 @@ public class Grille {
         return listPlayer;
     }
 
-    /*public void linkSalle(Grille grille){
-        ArrayList<Salle> listofSalle = getListOfSalle();
-        int size = listofSalle.size();
-        Union union = new Union(size);
-        while(union.components() > 1){
-            int i = union.components() - 2;
-            int j = union.components() - 1;
-            if (union.find(i) == union.find(j)){
-                return;
-            } else {
-                union.unify(i, j);
-            }
-        }
-    } */
-
     public void addEntite(Player player) {
         grille[(int)player.getPosition().getY()][(int)player.getPosition().getX()] = player.getSymbol();
         listPlayer.add(player);
