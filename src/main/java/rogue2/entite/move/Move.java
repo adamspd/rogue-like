@@ -3,6 +3,7 @@ package rogue2.entite.move;
 import rogue0.utils.Position;
 import rogue1.map.map.Grille;
 import rogue2.entite.player.Player;
+import rogue3.artefact.Artefact;
 
 public class Move {
     private static boolean isInCouloir = false;
@@ -41,10 +42,14 @@ public class Move {
     }
 
     public static void move(Grille grille, Player player, Position position){
-        if(grille.isInSalle(position)||grille.isInCouloir(position)) {
+        if(grille.isInSalle(position)||grille.isInCouloir(position)|| Artefact.isThere(grille, position, "! ")) {
             if(isInCouloir) {
                 grille.addElement(player.getPosition(), grille.getSymbolCouloir());
-            } else {
+            }
+            else {
+                if (Artefact.isThere(grille, position, "! ")) {
+                    grille.getListPotion().get(0).effect(grille,position);
+                }
                 grille.addPoint(player.getPosition());
             }
             if(grille.isInCouloir(position)) {

@@ -12,7 +12,7 @@ public class Potion extends abstractArtefact{
     }
 
     @Override
-    public void effect(Grille grille, Position position) {
+    public  void effect(Grille grille, Position position) {
         PlayerInterface player = grille.getListePlayer().get(0);
         if (!checkPvPlayer(player)){
             player.setHitPoints(player.getHitPoints() + 5);
@@ -22,6 +22,9 @@ public class Potion extends abstractArtefact{
         grille.addPoint(position);
         removePotionFromList(grille, position);
     }
+
+
+
     private boolean checkPvPlayer(PlayerInterface player){
         return player.getHitPoints() == player.getMaxHitPoints();
 

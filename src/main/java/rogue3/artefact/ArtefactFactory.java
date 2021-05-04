@@ -19,8 +19,8 @@ public class ArtefactFactory {
             case "¤ " -> new Coffre(position, "¤ ");
             case "£ " -> new Event(position, "£ ");
             case "K " -> new Key(position, "k ");
-            case "P " -> new Key(position, "P ");
-            case "! " -> new Key(position, "! ");
+            case "P " -> new Portal(position, "P ");
+            case "! " -> new Potion(position, "! ");
             default -> throw new IllegalArgumentException("Unknown Artefact");
         };
     }

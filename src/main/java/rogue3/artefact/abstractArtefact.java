@@ -1,7 +1,6 @@
 package rogue3.artefact;
 
 import rogue0.utils.Position;
-import java.lang.String;
 
 public abstract class abstractArtefact implements Artefact {
     private Position position;
@@ -19,4 +18,5 @@ public abstract class abstractArtefact implements Artefact {
     public String getSymbol() {
         return symbol;
     }
+
 }
