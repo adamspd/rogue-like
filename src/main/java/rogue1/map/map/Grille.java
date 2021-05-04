@@ -109,6 +109,10 @@ public class Grille {
         return listOfSalle;
     }
 
+    public ArrayList<Monster> getListMonster() {
+        return listMonster;
+    }
+
     public String getSymbolAtCoord(Position position) {
         return grille[(int)position.getY()][(int)position.getX()];
     }
