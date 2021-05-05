@@ -10,15 +10,6 @@ public abstract class AbstractEntity implements Entity {
     private int hitPoints;
     private final double movement;
     private final int damages;
-    private int ReserveHitpoints;
-
-    public int getReserveHitpoints() {
-        return ReserveHitpoints;
-    }
-
-    public void setReserveHitpoints(int reserveHitpoints) {
-        ReserveHitpoints = reserveHitpoints;
-    }
 
     public AbstractEntity(Position position, int hitPoints, double movement, int damages, String symbol) {
         this.symbol = symbol;

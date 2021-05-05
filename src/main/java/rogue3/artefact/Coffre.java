@@ -26,7 +26,7 @@ public class Coffre extends abstractArtefact{
             if (!checkPvPlayer(player)){
                 player.setHitPoints(player.getHitPoints() + 5);
             } else {
-                player.setReserveHitpoints(player.getReserveHitpoints() + 1);
+                player.setPotionReserve(player.getPotionReserve() + 1);
             }}
         removeCoffreFromList(grille, position);
     }
@@ -35,10 +35,7 @@ public class Coffre extends abstractArtefact{
         ArrayList<Coffre> listeCoffre = grille.getListCoffre();
         listeCoffre.removeIf(coffre -> coffre.getPosition() == position);
     }
-    @Override
-    public void effect(Grille grille, Position position) {
 
-    }
     private static boolean checkPvPlayer(PlayerInterface player){
         return player.getHitPoints() == player.getMaxHitPoints();
 

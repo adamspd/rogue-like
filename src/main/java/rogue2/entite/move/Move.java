@@ -3,7 +3,6 @@ package rogue2.entite.move;
 import rogue0.utils.Position;
 import rogue1.map.map.Grille;
 import rogue2.entite.player.Player;
-import rogue3.artefact.Artefact;
 import rogue3.artefact.Coffre;
 import rogue3.artefact.Portal;
 import rogue3.artefact.Potion;
@@ -46,11 +45,6 @@ public class Move {
     }
 
     public static void move(Grille grille, Player player, Position position){
-        Potion potion = grille.getListPotion().get(0);
-        Coffre coffre = grille.getListCoffre().get(0);
-
-
-
         if(grille.isInSalle(position)||grille.isInCouloir(position)||
                 grille.isPotionThere(position)||grille.isSafeThere(position)){
             if(isInCouloir) {
@@ -74,7 +68,7 @@ public class Move {
             player.setPosition(position);
             grille.addEntite(player);
         }
-        else if(grille.isPortalThere(position)){
+        /*else if(grille.isPortalThere(position)){
             double x = position.getX();
             double y = position.getY();
             grille.addPoint(position);
@@ -90,7 +84,7 @@ public class Move {
             isEnteredInPortal = false;
 
             return;
-        }
+        }*/
     }
 
 }

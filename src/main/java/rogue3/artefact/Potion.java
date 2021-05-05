@@ -2,33 +2,23 @@ package rogue3.artefact;
 
 import rogue0.utils.Position;
 import rogue1.map.map.Grille;
+import rogue2.entite.player.Player;
 import rogue2.entite.player.PlayerInterface;
 
 import java.util.ArrayList;
 
 public class Potion extends abstractArtefact{
-    public Potion(Position position, String symbol) {
+    public Potion(Position position) {
         super(position, "! ");
     }
 
-    @Override
-    public void effect(Grille grille, Position position) {
-        PlayerInterface player = grille.getPlayer();
-        if (!checkPvPlayer(player)){
-            player.setHitPoints(player.getHitPoints() + 5);
-        } else {
-         player.setReserveHitpoints(player.getReserveHitpoints() + 1);
-        }
-        grille.addPoint(position);
-        removePotionFromList(grille, position);
-    }
 
     public static void hasDrunkPotion(Grille grille, Position position){
-        PlayerInterface player = grille.getPlayer();
+        Player player = grille.getPlayer();
         if (!checkPvPlayer(player)){
             player.setHitPoints(player.getHitPoints() + 5);
         } else {
-            player.setReserveHitpoints(player.getReserveHitpoints() + 1);
+            player.setPotionReserve(player.getPotionReserve() + 1);
         }
         grille.addPoint(position);
         removePotionFromList(grille, position);

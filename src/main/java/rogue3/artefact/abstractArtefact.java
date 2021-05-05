@@ -21,8 +21,4 @@ public abstract class abstractArtefact implements Artefact {
         return symbol;
     }
 
-    /*public static boolean isEntityThere(Grille grille, Position position){
-
-    }*/
-
 }

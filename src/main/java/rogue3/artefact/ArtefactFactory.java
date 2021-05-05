@@ -18,7 +18,7 @@ public class ArtefactFactory {
         return switch (id) {
             case "¤ " -> new Coffre(position, "¤ ");
             case "K " -> new Key(position, "k ");
-            case "! " -> new Potion(position, "! ");
+            case "! " -> new Potion(position);
             default -> throw new IllegalArgumentException("Unknown Artefact");
         };
     }

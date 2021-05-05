@@ -14,9 +14,6 @@ public class Portal extends abstractArtefact{
         super(position, "P ");
     }
 
-    @Override
-    public void effect(Grille grille, Position position) {
-    }
     public static void initialisePortail(Grille grille) {
         ArrayList<Salle> listeSalles = grille.getListOfSalle();
         int nombre_de_salles = listeSalles.size();

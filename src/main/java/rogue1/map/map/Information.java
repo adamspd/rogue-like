@@ -66,46 +66,46 @@ public class Information {
             }
         }
     }
-    /*private static void SeeObject(Grille grille, ArrayList<Potion> potions, Player player) {
+    private static void SeeObject(Grille grille, ArrayList<Potion> potions, Player player) {
         for (Potion potion : potions) {
             boolean seeIt = !Utils.estAssezLoinDuJoueur(
                     potion.getPosition(),
-                    1, grille, joueur);
+                    1, grille, player);
             if (seeIt) {
                 System.out.println("$$$$ Potion En vue $$$$");
             }
         }
     }
 
-    private static void SeePortal(Grille grille, ArrayList<Portal> portals, Player joueur){
+    private static void SeePortal(Grille grille, ArrayList<Portal> portals, Player player){
         for(Portal portal : portals){
             boolean SeeIt = !Utils.estAssezLoinDuJoueur(
                     portal.getPosition(),
-                    1, grille, joueur);
+                    1, grille, player);
             if(SeeIt){
                 System.out.println("#### Un portail ! ####");
             }
         }
-    }*/
+    }
 
     public static void Affichage(Grille grille){
         ArrayList<Monster> lesMonstres = grille.getListMonster();
-        /*ArrayList<Potion> lesPotions = grille.getListPotion();
-        ArrayList<Portal> lesPortails = grille.getListPortal();*/
+        ArrayList<Potion> lesPotions = grille.getListPotion();
+        ArrayList<Portal> lesPortails = grille.getListPortail();
 
         Player joueur = grille.getPlayer();
         int lifePoints = joueur.getHitPoints();
         int nbreMonstres = lesMonstres.size();
         isEnoughfar(grille,lesMonstres,joueur, 1);
-        /*SeeObject(grille,lesPotions,joueur);
-        SeePortal(grille,lesPortails,joueur);*/
+        SeeObject(grille,lesPotions,joueur);
+        SeePortal(grille,lesPortails,joueur);
         System.out.println();
-        /*if (joueur.getPotionReserve() > 1){*/
-            System.out.println("Le nombre de Monstres : " + nbreMonstres + "\t \t Points de Vie restants: "+ lifePoints /*+
-                    "\t \t Potions en reserve: " + joueur.getPotionReserve()*/);
-       /* } else {
+        if (joueur.getPotionReserve() > 1){
+            System.out.println("Le nombre de Monstres : " + nbreMonstres + "\t \t Points de Vie restants: "+ lifePoints +
+                    "\t \t Potions en reserve: " + joueur.getPotionReserve());
+        } else {
             System.out.println("Le nombre de Monstres : " + nbreMonstres + "\t \t Points de Vie restants: "+ lifePoints +
                     "\t \t Potion en reserve: " + joueur.getPotionReserve());
-        }*/
+        }
     }
 }

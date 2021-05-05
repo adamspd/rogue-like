@@ -8,8 +8,4 @@ public class Key extends abstractArtefact {
         super(position, "K ");
     }
 
-    @Override
-    public void effect(Grille grille, Position position) {
-
-    }
 }
