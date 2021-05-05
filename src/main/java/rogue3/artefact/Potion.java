@@ -21,16 +21,20 @@ public class Potion extends abstractArtefact{
             player.setPotionReserve(player.getPotionReserve() + 1);
         }
         grille.addPoint(position);
-        removePotionFromList(grille, position);
+        removePotionFromList(grille, (int) position.getX(), (int) position.getY());
     }
 
     private static boolean checkPvPlayer(PlayerInterface player){
         return player.getHitPoints() == player.getMaxHitPoints();
 
     }
-    private static void removePotionFromList(Grille grille, Position position) {
-        ArrayList<Potion> listePotion = grille.getListPotion();
-        listePotion.removeIf(potion -> potion.getPosition() == position);
-    }
 
+    private static void removePotionFromList(Grille grille, int posX, int posY) {
+        ArrayList<Potion> listePotion = grille.getListPotion();
+        for (Potion potion : listePotion) {
+            if (potion.getPosition().getX() == posX && potion.getPosition().getY() == posY){
+                listePotion.remove(potion);
+            }
+        }
+    }
 }
