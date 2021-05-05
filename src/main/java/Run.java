@@ -41,6 +41,7 @@ public class Run {
                 else if (touche.matches("q.*")){Move.moveLeft(grille, grille.getPlayer());}
                 else if (touche.matches("s.*")){Move.moveDown(grille, grille.getPlayer());}
                 else if (touche.matches("d.*")){Move.moveRight(grille, grille.getPlayer());}
+                grille.attack(grille, player);
                 draw.draw(grille);
             } catch (Exception e) {
                 System.out.println("error");

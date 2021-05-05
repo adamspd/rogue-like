@@ -454,4 +454,20 @@ public class Grille {
     public boolean isInsCouloirDroite(Position position) {return isInCouloir(new Position(position.getX()+1,position.getY()));}
     public boolean isInsCouloirHaut(Position position) {return isInCouloir(new Position(position.getX(),position.getY()-1));}
     public boolean isInsCouloirBas(Position position) {return isInCouloir(new Position(position.getX(),position.getY()+1));}
+
+    public void attack(Grille grille, Player player){
+        ArrayList<Monster> monstres = grille.getListMonster();;
+        for (Monster monstre : monstres) {
+            boolean estEnCombat = !Utils.estAssezLoinDuJoueur(
+                    monstre.getPosition(),
+                    1,grille,player);
+            if (estEnCombat) {
+                attack(player, monstre);
+            }
+        }
+    }
+
+    public static void attack(Player player, Monster monster){
+        player.setHitPoints(player.getHitPoints() - monster.getDamages());
+    }
 }
