@@ -16,15 +16,15 @@ public class Run {
         Grille grille = map.generateSalle();
         map.generateSalle();
         draw.draw(grille);
-        Player player = grille.getListePlayer().get(0);
+        Player player = grille.getPlayer();
         Scanner scan = new Scanner(System.in);
         while(player.isAlive()) {
             try {
                 String touche = scan.nextLine();
-                if (touche.matches("z.*")){Move.moveUp(grille, grille.getListePlayer().get(0)); }
-                else if (touche.matches("q.*")){Move.moveLeft(grille, grille.getListePlayer().get(0));}
-                else if (touche.matches("s.*")){Move.moveDown(grille, grille.getListePlayer().get(0));}
-                else if (touche.matches("d.*")){Move.moveRight(grille, grille.getListePlayer().get(0));}
+                if (touche.matches("z.*")){Move.moveUp(grille, grille.getPlayer()); }
+                else if (touche.matches("q.*")){Move.moveLeft(grille, grille.getPlayer());}
+                else if (touche.matches("s.*")){Move.moveDown(grille, grille.getPlayer());}
+                else if (touche.matches("d.*")){Move.moveRight(grille, grille.getPlayer());}
                 draw.draw(grille);
             } catch (Exception e) {
                 System.out.println("error");

@@ -1,6 +1,8 @@
 package rogue3.artefact;
 
 import rogue0.utils.Position;
+import rogue1.map.map.Grille;
+import rogue2.entite.abstrait.AbstractEntity;
 
 public abstract class abstractArtefact implements Artefact {
     private Position position;
@@ -18,5 +20,9 @@ public abstract class abstractArtefact implements Artefact {
     public String getSymbol() {
         return symbol;
     }
+
+    /*public static boolean isEntityThere(Grille grille, Position position){
+
+    }*/
 
 }

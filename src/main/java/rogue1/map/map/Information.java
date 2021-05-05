@@ -93,7 +93,7 @@ public class Information {
         /*ArrayList<Potion> lesPotions = grille.getListPotion();
         ArrayList<Portal> lesPortails = grille.getListPortal();*/
 
-        Player joueur = grille.getListePlayer().get(0);
+        Player joueur = grille.getPlayer();
         int lifePoints = joueur.getHitPoints();
         int nbreMonstres = lesMonstres.size();
         isEnoughfar(grille,lesMonstres,joueur, 1);

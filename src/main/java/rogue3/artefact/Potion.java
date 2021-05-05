@@ -12,8 +12,8 @@ public class Potion extends abstractArtefact{
     }
 
     @Override
-    public  void effect(Grille grille, Position position) {
-        PlayerInterface player = grille.getListePlayer().get(0);
+    public void effect(Grille grille, Position position) {
+        PlayerInterface player = grille.getPlayer();
         if (!checkPvPlayer(player)){
             player.setHitPoints(player.getHitPoints() + 5);
         } else {
@@ -23,9 +23,18 @@ public class Potion extends abstractArtefact{
         removePotionFromList(grille, position);
     }
 
+    public static void hasDrunkPotion(Grille grille, Position position){
+        PlayerInterface player = grille.getPlayer();
+        if (!checkPvPlayer(player)){
+            player.setHitPoints(player.getHitPoints() + 5);
+        } else {
+            player.setReserveHitpoints(player.getReserveHitpoints() + 1);
+        }
+        grille.addPoint(position);
+        removePotionFromList(grille, position);
+    }
 
-
-    private boolean checkPvPlayer(PlayerInterface player){
+    private static boolean checkPvPlayer(PlayerInterface player){
         return player.getHitPoints() == player.getMaxHitPoints();
 
     }

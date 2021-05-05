@@ -2,11 +2,15 @@ package rogue1.map.map;
 
 import rogue0.utils.Position;
 import rogue2.entite.player.Player;
+import rogue3.artefact.Event;
+import rogue3.artefact.Portal;
 
 import java.util.ArrayList;
 
 public class Map {
     public Map(){}
+    public int NIVEAU;
+    public int NOMBRE_DE_NIVEAUX;
 
     public Grille generateSalle(){
         Grille grille = new Grille();
@@ -15,6 +19,8 @@ public class Map {
         addPlayer(grille);
         grille.initialiseMonstre(grille);
         grille.initialiseArtefact(grille);
+        Portal.initialisePortail(grille);
+        //Event.genererateStairs(grille);
         return grille;
     }
 
@@ -44,7 +50,6 @@ public class Map {
                         x = (int) salleDepart.getPos().getX();
                         y = (int) salleDepart.getPos().getY();
                     }
-
                 }
                 else
                 {
@@ -53,7 +58,6 @@ public class Map {
                     y = (int) salleDepart.getPos().getY();
 
                 }
-
             }
         }
         return salleDepart;

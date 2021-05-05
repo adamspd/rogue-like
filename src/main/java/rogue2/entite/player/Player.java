@@ -12,9 +12,4 @@ public class Player extends AbstractEntity implements PlayerInterface {
     public String getName() {
         return null;
     }
-    private boolean isInCouloir = false;
-
-    public boolean getIsInCouloir() {
-        return isInCouloir;
-    }
 }

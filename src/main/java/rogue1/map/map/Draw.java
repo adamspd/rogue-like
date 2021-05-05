@@ -46,6 +46,6 @@ public class Draw {
                 System.out.println("");
             }
 
-        Information.Affichage(grille);
+            Information.Affichage(grille);
     }
 }

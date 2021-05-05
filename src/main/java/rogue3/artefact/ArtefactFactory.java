@@ -17,9 +17,7 @@ public class ArtefactFactory {
     public Artefact generate(Position position, String id) {
         return switch (id) {
             case "¤ " -> new Coffre(position, "¤ ");
-            case "£ " -> new Event(position, "£ ");
             case "K " -> new Key(position, "k ");
-            case "P " -> new Portal(position, "P ");
             case "! " -> new Potion(position, "! ");
             default -> throw new IllegalArgumentException("Unknown Artefact");
         };
