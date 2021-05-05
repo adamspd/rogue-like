@@ -211,6 +211,15 @@ public class Grille {
         return grille[(int)position.getY()][(int)position.getX()].equals("P ");
     }
 
+    public boolean isMonsterThere(Position position) {
+        boolean answer = false;
+        if (grille[(int)position.getY()][(int)position.getX()].equals("R ")||
+                grille[(int)position.getY()][(int)position.getX()].equals("O ")||
+                grille[(int)position.getY()][(int)position.getX()].equals("G ")){
+            answer = true;
+        }
+        return answer;
+    }
 
     public void relierSalle(Grille grille) {
         ArrayList<Salle> listeSalle = getListOfSalle();
@@ -341,6 +350,16 @@ public class Grille {
         this.listPotion = listPotion;
     }
 
+    public Monster getMonster(Position position) {
+        Monster returnMonster = null;
+        for (Monster monster : listMonster) {
+            if (monster.getPosition().getX() ==  position.getX() &&
+            monster.getPosition().getY() == position.getY()){
+                returnMonster = monster;
+            }
+        }
+        return returnMonster;
+    }
 
     private void ajoutCouloirGrille(Couloir couloir,Grille grille) {
         String symboleCouloir = couloir.getSYMBOLE();

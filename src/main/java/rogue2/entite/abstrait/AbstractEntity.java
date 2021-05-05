@@ -38,7 +38,7 @@ public abstract class AbstractEntity implements Entity {
     }
 
     public void setHitPoints(int hitPoints) {
-        hitPoints = hitPoints;
+        this.hitPoints = hitPoints;
     }
 
     public double getMovement() {

@@ -2,6 +2,7 @@ package rogue2.entite.move;
 
 import rogue0.utils.Position;
 import rogue1.map.map.Grille;
+import rogue2.entite.monstre.Monster;
 import rogue2.entite.player.Player;
 import rogue3.artefact.Coffre;
 import rogue3.artefact.Portal;
@@ -85,6 +86,9 @@ public class Move {
 
             return;
         }*/
+        else if (grille.isMonsterThere(position)){
+            player.attackMonster(grille, position);
+        }
     }
 
 }

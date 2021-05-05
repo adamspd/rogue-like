@@ -1,6 +1,7 @@
 package rogue1.map.map;
 
 import rogue0.utils.Couleur;
+import rogue2.entite.monstre.Monster;
 import rogue3.artefact.Coffre;
 import rogue3.artefact.Potion;
 
@@ -54,10 +55,10 @@ public class Draw {
     }
 
     public void affiche(Grille grille){
-        ArrayList<Coffre> listPotion = grille.getListCoffre();
-        System.out.println("Nombre Coffre: " + listPotion.size());
-        for (Coffre potion : listPotion) {
-            System.out.println("x: " + potion.getPosition().getX() + "\ty: " + potion.getPosition().getY());
+        ArrayList<Monster> listMonster = grille.getListMonster();
+        System.out.println("Nombre Monstre: " + listMonster.size());
+        for (Monster monster : listMonster) {
+            System.out.print("x: " + monster.getPosition().getX() + " y: " + monster.getPosition().getY()+"\t");
         }
     }
 

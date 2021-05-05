@@ -49,4 +49,8 @@ public abstract class  AbstractMonster extends AbstractEntity implements Monster
         player.setHitPoints(player.getHitPoints() - getDamages());
     }
 
+    @Override
+    public boolean isAlive(){
+        return this.getHitPoints() > 0;
+    }
 }
