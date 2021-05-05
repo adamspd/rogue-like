@@ -19,8 +19,8 @@ public class Run {
         map.generateSalle();
         draw.draw(grille);
 
-        /*
-        Union union = new Union(grille);
+
+        /*Union union = new Union(grille);
         int[][] matrix = union.createMatrix();
         union.printMatrix(matrix);
         union.colorizeMatrix(matrix);
@@ -28,8 +28,8 @@ public class Run {
         union.searchPath(matrix, 10, 15, path);
         union.printListPosition(path);
         union.putPath(matrix, path);
-        union.colorizeMatrix(matrix);
-        */
+        union.colorizeMatrix(matrix);*/
+
 
 
         Player player = grille.getPlayer();
