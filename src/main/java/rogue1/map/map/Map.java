@@ -1,6 +1,7 @@
 package rogue1.map.map;
 
 import rogue0.utils.Position;
+import rogue0.utils.Union;
 import rogue2.entite.player.Player;
 import rogue3.artefact.Event;
 import rogue3.artefact.Portal;

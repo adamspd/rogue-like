@@ -28,12 +28,16 @@ public class Coffre extends abstractArtefact{
             } else {
                 player.setPotionReserve(player.getPotionReserve() + 1);
             }}
-        removeCoffreFromList(grille, position);
+        removeCoffreFromList(grille, (int) position.getX(), (int) position.getY());
     }
 
-    private static void removeCoffreFromList(Grille grille, Position position) {
+    private static void removeCoffreFromList(Grille grille, int posX, int posY) {
         ArrayList<Coffre> listeCoffre = grille.getListCoffre();
-        listeCoffre.removeIf(coffre -> coffre.getPosition() == position);
+        for (Coffre coffre : listeCoffre) {
+            if (coffre.getPosition().getX() == posX && coffre.getPosition().getY() == posY){
+                listeCoffre.remove(coffre);
+            }
+        }
     }
 
     private static boolean checkPvPlayer(PlayerInterface player){
