@@ -3,6 +3,7 @@ package rogue0.utils;
 public class Position {
     private double X;
     private double Y;
+    private Position parent;
 
     public Position(int posX, int posY){
         X = posX;
@@ -59,5 +60,14 @@ public class Position {
     public void setPos(Position pos) {
         X = pos.X;
         Y = pos.Y;
+    }
+
+    public Position getParent() {
+        return parent;
+    }
+
+    public void setParent(Position parent) {
+        this.parent = parent;
+
     }
 }

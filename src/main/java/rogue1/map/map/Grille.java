@@ -1,4 +1,6 @@
 package rogue1.map.map;
+
+import rogue0.utils.DFS;
 import rogue0.utils.Position;
 import rogue0.utils.Utils;
 import rogue2.entite.monstre.Monster;
@@ -7,6 +9,7 @@ import rogue2.entite.player.Player;
 import rogue3.artefact.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Grille {
     private final int Length = 30;
@@ -469,5 +472,20 @@ public class Grille {
 
     public static void attack(Player player, Monster monster){
         player.setHitPoints(player.getHitPoints() - monster.getDamages());
+    }
+    public void SearchPlayer(Grille grille,Monster monster){
+        List<Position> path = new ArrayList<>();
+        DFS dfs = new DFS(grille);
+        int [][] matrix = dfs.createMatrix();
+        DFS.searchPath(matrix,(int) monster.getPosition().getX(), (int) monster.getPosition().getY(), path);
+        int size = path.size();
+        dfs.printPosition(monster.getPosition());
+        for(int i = size-1;i > 0; i--){
+            grille.addPoint(monster.getPosition());
+            monster.setPosition(path.get(i));
+            grille.addEntite(monster);
+        }
+        System.out.println();
+        dfs.printPosition(monster.getPosition());
     }
 }

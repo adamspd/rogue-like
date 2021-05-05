@@ -1,11 +1,12 @@
 package rogue1.map.map;
 
 import rogue0.utils.Couleur;
+import rogue0.utils.Position;
+import rogue0.utils.DFS;
 import rogue2.entite.monstre.Monster;
-import rogue3.artefact.Coffre;
-import rogue3.artefact.Potion;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Draw {
     private Grille grille;
@@ -51,7 +52,9 @@ public class Draw {
             }
 
             Information.Affichage(grille);
-            affiche(grille);
+            //affiche(grille);
+            rechercheJoeur(grille);
+            grille.SearchPlayer(grille, grille.getListMonster().get(0));
     }
 
     public void affiche(Grille grille){
@@ -60,6 +63,26 @@ public class Draw {
         for (Monster monster : listMonster) {
             System.out.print("x: " + monster.getPosition().getX() + " y: " + monster.getPosition().getY()+"\t");
         }
+    }
+
+    public void rechercheJoeur(Grille grille){
+        DFS DFS = new DFS(grille);
+        int[][] matrix = DFS.createMatrix();
+        //union.printMatrix(matrix);
+        //union.colorizeMatrix(matrix);
+        final List<Position> path = new ArrayList<>();
+       /* System.out.print("joueur: ");
+        DFS.printPosition(grille.getPlayer().getPosition());
+        System.out.print("\t");
+        System.out.print("Monstre: ");
+        DFS.printPosition(grille.getListMonster().get(0).getPosition());
+        System.out.println("");*/
+        DFS.searchPath(matrix, (int) grille.getListMonster().get(0).getPosition().getX(), (int) grille.getListMonster().get(0).getPosition().getY(), path);
+        //System.out.println(path.size());
+        /*DFS.printPosition(path.get(0));
+        DFS.printPosition(path.get(path.size() - 1));*/
+        DFS.putPath(matrix, path);
+        DFS.colorizeMatrix(matrix);
     }
 
 

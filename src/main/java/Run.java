@@ -1,14 +1,10 @@
-import rogue0.utils.Position;
-import rogue0.utils.Union;
-import rogue1.map.map.Grille;
+
 import rogue1.map.map.Draw;
+import rogue1.map.map.Grille;
 import rogue1.map.map.Map;
-import rogue1.map.map.Salle;
 import rogue2.entite.move.Move;
 import rogue2.entite.player.Player;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Run {
@@ -19,16 +15,23 @@ public class Run {
         map.generateSalle();
         draw.draw(grille);
 
-
-        /*Union union = new Union(grille);
+/*
+        BFS union = new BFS(grille);
         int[][] matrix = union.createMatrix();
-        union.printMatrix(matrix);
+        //union.printMatrix(matrix);
         union.colorizeMatrix(matrix);
         List<Position> path = new ArrayList<>();
-        union.searchPath(matrix, 10, 15, path);
-        union.printListPosition(path);
+        //union.BFS(matrix, 10, 15, path);
+        LinkedList<Position> chemin = union.BFS(grille, grille.getListMonster().get(0).getPosition(), grille.getPlayer().getPosition(), grille.getListMonster());
+       /* union.printListPosition(path);
         union.putPath(matrix, path);
-        union.colorizeMatrix(matrix);*/
+        union.colorizeMatrix(matrix);
+        System.out.println(chemin.size());
+        for (Position position : chemin) {
+          union.printPosition(position);
+
+        }
+*/
 
 
 
@@ -50,3 +53,4 @@ public class Run {
         }
     }
 }
+
