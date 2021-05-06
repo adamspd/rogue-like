@@ -1,58 +1,37 @@
 package rogue0.utils;
 
 public class Position {
-    private double X;
-    private double Y;
-    private Position parent;
+    private int X;
+    private int Y;
 
     public Position(int posX, int posY){
         X = posX;
         Y = posY;
     }
 
-    public Position(double x, double y) {
-        this.X = x;
-        this.Y = y;
-    }
-
     /* S'appoche (ou s'éloigne si d < 0) de la position pos jusqu'à une distance minimal de 1. */
-    public Position moveToward(Position pos, double distance) {
-        double dx = X - pos.X;
-        double dy = Y - pos.Y;
-        double d = getDistance(pos);
-        double moveDistance = (d < 1) ? 0 : Math.min(distance, d - 1);
+    public Position moveToward(Position pos, int distance) {
+        int dx = X - pos.X;
+        int dy = Y - pos.Y;
+        int d = getDistance(pos);
+        int moveDistance = (d < 1) ? 0 : Math.min(distance, d - 1);
         return new Position(dx / d * moveDistance, dy / d * moveDistance);
     }
 
     /* Retourne la distance entre le point courant et celui passé en paramètre. */
-    public double getDistance(Position pos) {
-        double dx = X - pos.X;
-        double dy = Y - pos.Y;
-        return Math.hypot(dx, dy);
+    public int getDistance(Position pos) {
+        int dx = X - pos.X;
+        int dy = Y - pos.Y;
+        return (int) Math.hypot(dx, dy);
     }
 
-    public double getX() {
-        return X;
-    }
+    public int getX() { return X; }
+    public int getY() { return Y; }
 
-    public void setX(int posX) {
-        X = posX;
-    }
-
-    public double getY() {
-        return Y;
-    }
-
-    public void setY(int posY) {
-        Y = posY;
-    }
+    public void setX(int posX) { X = posX; }
+    public void setY(int posY) { Y = posY; }
 
     public void setPos(int posX, int posY){
-        X = posX;
-        Y = posY;
-    }
-
-    public void setPos(double posX, double posY){
         X = posX;
         Y = posY;
     }
@@ -60,14 +39,5 @@ public class Position {
     public void setPos(Position pos) {
         X = pos.X;
         Y = pos.Y;
-    }
-
-    public Position getParent() {
-        return parent;
-    }
-
-    public void setParent(Position parent) {
-        this.parent = parent;
-
     }
 }

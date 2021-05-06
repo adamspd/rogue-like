@@ -17,8 +17,7 @@ public class Portal extends abstractArtefact{
     public static void initialisePortail(Grille grille) {
         ArrayList<Salle> listeSalles = grille.getListOfSalle();
         int nombre_de_salles = listeSalles.size();
-        if(nombre_de_salles<=4){NOMBRE_PORTAILS=2;}
-
+        if(nombre_de_salles<=4){ NOMBRE_PORTAILS=2; }
         Salle salle_aleatoire;
         for (int i=0; i < NOMBRE_PORTAILS; i++){
             do { salle_aleatoire = listeSalles.get((int) (Math.random() * nombre_de_salles));}
@@ -34,9 +33,9 @@ public class Portal extends abstractArtefact{
                     grille.isInsCouloirHaut(new Position(x,y))||
                     grille.isInsCouloirDroite(new Position(x,y)) ||
                     grille.isInsCouloirGauche(new Position(x,y)));
-            Portal portail = new Portal(new Position(x,y),"P ");
+            Portal portail = new Portal(new Position(x,y), getSymbole());
 
-            grille.addElement(portail.getPosition(), "P ");
+            grille.addElement(portail.getPosition(), getSymbole());
             grille.addPortailList(portail);
         }
     }
@@ -52,10 +51,10 @@ public class Portal extends abstractArtefact{
         ArrayList<Portal> listePortail = grille.getListPortail();
         int i=0;
         for (Portal p : listePortail) {
-            if (p.getPosition()==position) {break;}
+            if (p.getPosition().getX()==position.getX() && p.getPosition().getY()== position.getY()) {break;}
             i++;
         }
-        if(i%2==0){ return listePortail.get(i+1); }
+        if(i%2==0){ return listePortail.get(i+1); }  //Portail associé
         else { return listePortail.get(i-1); }
     }
 

@@ -61,16 +61,16 @@ public class Grille {
     }
 
     public void addEntite(Player player) {
-        grille[(int)player.getPosition().getY()][(int)player.getPosition().getX()] = player.getSymbol();
+        grille[player.getPosition().getY()][(int)player.getPosition().getX()] = player.getSymbol();
         listPlayer.add(player);
     }
 
     public void addEntite(Monster monster) {
-        grille[(int)monster.getPosition().getY()][(int)monster.getPosition().getX()] = monster.getSymbol();
+        grille[monster.getPosition().getY()][monster.getPosition().getX()] = monster.getSymbol();
         listMonster.add(monster);
     }
     public void addEntite(Artefact artefact) {
-        grille[(int)artefact.getPosition().getY()][(int)artefact.getPosition().getX()] = artefact.getSymbol();
+        grille[artefact.getPosition().getY()][(int)artefact.getPosition().getX()] = artefact.getSymbol();
         listArtefact.add(artefact);
     }
 
@@ -153,8 +153,8 @@ public class Grille {
         ArrayList<Position> tab = new ArrayList<>();
         for(int a = 0 ; a < choix; a++) {
             int[] coord = Utils.getRandomCoordSalle(salle);
-            double coordSalleRandomX = coord[0];
-            double coordSalleRandomY = coord[1];
+            int coordSalleRandomX = coord[0];
+            int coordSalleRandomY = coord[1];
             Position position = new Position(coordSalleRandomX, coordSalleRandomY);
 
             boolean isEnoughFarPlayer = Utils.estAssezLoinDuJoueur(
@@ -222,6 +222,10 @@ public class Grille {
             answer = true;
         }
         return answer;
+    }
+
+    public boolean isStairsThere(Position position){
+        return grille[(int)position.getY()][(int)position.getX()]==Event.stairs_symbol;
     }
 
     public void relierSalle(Grille grille) {

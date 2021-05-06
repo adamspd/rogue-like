@@ -2,6 +2,7 @@ package rogue1.map.map;
 
 import rogue0.utils.Position;
 import rogue2.entite.player.Player;
+import rogue3.artefact.Event;
 import rogue3.artefact.Portal;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class Map {
         grille.initialiseMonstre(grille);
         grille.initialiseArtefact(grille);
         Portal.initialisePortail(grille);
-        //Event.genererateStairs(grille);
+        Event.genererateStairs(grille);
         return grille;
     }
 

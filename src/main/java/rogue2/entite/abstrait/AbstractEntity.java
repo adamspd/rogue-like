@@ -8,10 +8,10 @@ public abstract class AbstractEntity implements Entity {
     private Position position;
     private final int maxHitPoints;
     private int hitPoints;
-    private final double movement;
+    private final int movement;
     private final int damages;
 
-    public AbstractEntity(Position position, int hitPoints, double movement, int damages, String symbol) {
+    public AbstractEntity(Position position, int hitPoints, int movement, int damages, String symbol) {
         this.symbol = symbol;
         maxHitPoints = hitPoints;
         this.position = position;
@@ -41,7 +41,7 @@ public abstract class AbstractEntity implements Entity {
         this.hitPoints = hitPoints;
     }
 
-    public double getMovement() {
+    public int getMovement() {
         return movement;
     }
 

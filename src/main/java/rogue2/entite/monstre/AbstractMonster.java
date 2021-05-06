@@ -11,17 +11,17 @@ import java.util.ArrayList;
 
 public abstract class  AbstractMonster extends AbstractEntity implements Monster {
 
-    public AbstractMonster(Position position, int hitPoints, double movement, int damages, String symbol) {
+    public AbstractMonster(Position position, int hitPoints, int movement, int damages, String symbol) {
         super(position, hitPoints, movement, damages, symbol);
     }
 
     public void flee(Player player){
-        double movement = getMovement();
+        int movement = getMovement();
         move(player, -movement);
     }
 
     public boolean moveAway(Player player, double distance){
-        double movement = getMovement();
+        int movement = getMovement();
         boolean hasToMove = getDistance(player) < distance;
         if (hasToMove){
             move(player, -movement);
@@ -29,20 +29,20 @@ public abstract class  AbstractMonster extends AbstractEntity implements Monster
         return hasToMove;
     }
 
-    private void move(Player player, double distance){
+    private void move(Player player, int distance){
         Position monsterPosition = getPosition();
         Position playerPosition = player.getPosition();
         setPosition(monsterPosition.moveToward(playerPosition, -distance));
     }
 
-    private double getDistance(Player player){
+    private int getDistance(Player player){
         Position monsterPosition = getPosition();
         Position playerPosition = player.getPosition();
         return monsterPosition.getDistance(playerPosition);
     }
 
     public boolean engage(Player player){
-        double movement = getMovement();
+        int movement = getMovement();
         boolean hasToMove = getDistance(player) > 1;
         if (hasToMove){
             move(player, movement);

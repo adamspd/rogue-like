@@ -9,7 +9,7 @@ public interface Entity {
     int getHitPoints();
     void setHitPoints(int PV);
     int getMaxHitPoints();
-    double getMovement();
+    int getMovement();
     int getDamages();
     boolean isAlive();
 }

@@ -25,7 +25,9 @@ public class Utils {
                     }
                 }
             }
-        } catch (Exception e){}
+        } catch (Exception e){
+            System.out.println("Exception: " + e);
+        }
         return isEnoughFar;
     }
 

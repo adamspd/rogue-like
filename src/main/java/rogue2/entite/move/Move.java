@@ -5,42 +5,45 @@ import rogue1.map.map.Grille;
 import rogue2.entite.monstre.Monster;
 import rogue2.entite.player.Player;
 import rogue3.artefact.Coffre;
+import rogue3.artefact.Event;
+import rogue3.artefact.Portal;
 import rogue3.artefact.Potion;
 
 public class Move {
     private static boolean isInCouloir = false;
     private static boolean isEnteredInPortal = false;
+    private static String direction;
 
 
     public static void moveDown(Grille grille, Player player) {
-        double x = player.getPosition().getX();
-        double y = player.getPosition().getY();
+        int x = player.getPosition().getX();
+        int y = player.getPosition().getY();
+        direction = "down";
         Position position = new Position(x, y + 1);
-
         move(grille, player, position);
     }
 
     public static void moveUp(Grille grille, Player player) {
-        double x = player.getPosition().getX();
-        double y = player.getPosition().getY();
+        int x = player.getPosition().getX();
+        int y = player.getPosition().getY();
+        direction = "up";
         Position position = new Position(x, y - 1);
-
         move(grille, player, position);
     }
 
     public static void moveLeft(Grille grille, Player player) {
-        double x = player.getPosition().getX();
-        double y = player.getPosition().getY();
+        int x = player.getPosition().getX();
+        int y = player.getPosition().getY();
+        direction = "left";
         Position position = new Position(x - 1, y);
-
         move(grille, player, position);
     }
 
     public static void moveRight(Grille grille, Player player) {
-        double x = player.getPosition().getX();
-        double y = player.getPosition().getY();
+        int x = player.getPosition().getX();
+        int y = player.getPosition().getY();
+        direction = "right";
         Position position = new Position(x + 1, y);
-
         move(grille, player, position);
     }
 
@@ -57,40 +60,68 @@ public class Move {
                 } else if (grille.isSafeThere(position)){
                     Coffre.hasOpenSafe(grille, position);
                 }
-                grille.addPoint(player.getPosition());
-                //if(grille.getSymbolAtCoord(position)!= Portal.getSymbole()){grille.addPoint(position);}
+                if(direction=="down" && position.getX()==Event.posX_stairs && position.getY()==Event.posY_stairs+Event.stairs_length) { grille.addElement(player.getPosition(), Event.stairs_symbol);}
+                else if(grille.getSymbolAtCoord(player.getPosition())!= Portal.getSymbole()){grille.addPoint(player.getPosition());}
             }
             if(grille.isInCouloir(position)) {
                 isInCouloir = true;
             } else {
-                isInCouloir=false;
+                isInCouloir = false;
             }
             player.setPosition(position);
             grille.addEntite(player);
-            for(Monster monster : grille.getListMonster()) {
-                grille.SearchPlayer(grille, monster);
-            }
         }
-        /*else if(grille.isPortalThere(position)){
-            double x = position.getX();
-            double y = position.getY();
-            grille.addPoint(position);
-            x-=1.0;
+        else if(grille.isPortalThere(position)){
+            grille.addPoint(player.getPosition());
             Portal portail_de_sortie = Portal.entrerPortail(position, grille);
-            x= portail_de_sortie.getPosition().getX();
-            y= portail_de_sortie.getPosition().getY();
+            position.setPos(portail_de_sortie.getPosition());
+            player.setPosition(portail_de_sortie.getPosition());
+
             isEnteredInPortal = true;
-
-            if(grille.getSymbolAtCoord(new Position(x-1,y))==grille.getSymbolSalle()) {
-                move(grille, player, position);
-            } else {move(grille, player, position);}
+            if(direction=="down"){
+                position.setPos(position.getX(),position.getY()+1);
+                if(grille.getSymbolAtCoord(position)==grille.getSymbolGrille()) {moveUp(grille, player);}
+                else{moveDown(grille, player);}
+            }
+            else if (direction=="up"){
+                position.setPos(position.getX(),position.getY()-1);
+                if(grille.getSymbolAtCoord(position)==grille.getSymbolGrille()) {moveDown(grille, player);}
+                else{moveUp(grille, player);}
+            }
+            else if (direction=="left"){
+                position.setPos(position.getX()-1,position.getY());
+                if(grille.getSymbolAtCoord(position)==grille.getSymbolGrille()) {moveRight(grille, player);}
+                else{moveLeft(grille, player);}
+            }
+            else if (direction=="right"){
+                position.setPos(position.getX()+1,position.getY());
+                if(grille.getSymbolAtCoord(position)==grille.getSymbolGrille()) {moveLeft(grille, player);}
+                else{moveRight(grille, player);}
+            }
             isEnteredInPortal = false;
-
-            return;
-        }*/
+            return;  //Pour éviter des bugs potentiels, notamment d'éclatement de carte.
+        }
         else if (grille.isMonsterThere(position)){
-            player.attackMonster(grille, position);
+            if(isEnteredInPortal) { // A la sortie du portail, le monstre est transpersé.
+                Monster monster = grille.getMonster(position);
+                grille.addPoint(monster.getPosition());
+                grille.getListMonster().remove(monster);
+                player.setPosition(position);
+                grille.addEntite(player);
+            }
+            else { player.attackMonster(grille, position); }
+        }
+        else if(grille.isStairsThere(position)){
+            //Si le joueur est à l'entrée de l'escalier
+            if(player.getPosition().getX()==Event.posX_stairs&&player.getPosition().getY()==Event.posY_stairs+Event.stairs_length) {
+                grille.addPoint(player.getPosition());
+            }
+            else if (direction=="up" || direction=="down"){grille.addElement(player.getPosition(), Event.stairs_symbol);}
+            player.setPosition(position);
+            grille.addEntite(player);
+        }
+        for(Monster monster : grille.getListMonster()) {
+            grille.SearchPlayer(grille, monster);
         }
     }
-
 }
