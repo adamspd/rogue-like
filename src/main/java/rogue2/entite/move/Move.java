@@ -5,7 +5,6 @@ import rogue1.map.map.Grille;
 import rogue2.entite.monstre.Monster;
 import rogue2.entite.player.Player;
 import rogue3.artefact.Coffre;
-import rogue3.artefact.Portal;
 import rogue3.artefact.Potion;
 
 public class Move {
@@ -68,6 +67,9 @@ public class Move {
             }
             player.setPosition(position);
             grille.addEntite(player);
+            for(Monster monster : grille.getListMonster()) {
+                grille.SearchPlayer(grille, monster);
+            }
         }
         /*else if(grille.isPortalThere(position)){
             double x = position.getX();

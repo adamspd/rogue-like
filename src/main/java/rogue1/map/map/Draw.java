@@ -54,7 +54,7 @@ public class Draw {
             Information.Affichage(grille);
             //affiche(grille);
             rechercheJoeur(grille);
-            grille.SearchPlayer(grille, grille.getListMonster().get(0));
+
     }
 
     public void affiche(Grille grille){

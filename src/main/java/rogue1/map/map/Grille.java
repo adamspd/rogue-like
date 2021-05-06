@@ -473,6 +473,9 @@ public class Grille {
     public static void attack(Player player, Monster monster){
         player.setHitPoints(player.getHitPoints() - monster.getDamages());
     }
+    public void addSymbolMonster(Position position,Monster monster){
+        grille[(int)position.getY()][(int)position.getX()] = monster.getSymbol();
+    }
     public void SearchPlayer(Grille grille,Monster monster){
         List<Position> path = new ArrayList<>();
         DFS dfs = new DFS(grille);
@@ -480,11 +483,12 @@ public class Grille {
         DFS.searchPath(matrix,(int) monster.getPosition().getX(), (int) monster.getPosition().getY(), path);
         int size = path.size();
         dfs.printPosition(monster.getPosition());
-        for(int i = size-1;i > 0; i--){
-            grille.addPoint(monster.getPosition());
+        grille.addPoint(monster.getPosition());
+
+        for(int i = 0;i < size-1; i++){
             monster.setPosition(path.get(i));
-            grille.addEntite(monster);
         }
+        grille.addSymbolMonster(monster.getPosition(), monster);
         System.out.println();
         dfs.printPosition(monster.getPosition());
     }
