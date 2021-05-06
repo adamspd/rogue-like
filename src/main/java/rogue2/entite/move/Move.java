@@ -10,7 +10,7 @@ import rogue3.artefact.Portal;
 import rogue3.artefact.Potion;
 
 public class Move {
-    private static boolean isInCouloir = false;
+    public static boolean isInCouloir = false;
     private static boolean isEnteredInPortal = false;
     private static String direction;
 

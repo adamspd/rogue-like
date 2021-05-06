@@ -1,15 +1,20 @@
 package rogue2.entite.monstre;
 
 import rogue0.utils.Position;
-import rogue0.utils.Utils;
-import rogue1.map.map.Grille;
 import rogue2.entite.abstrait.AbstractEntity;
 import rogue2.entite.player.Player;
-import rogue2.entite.player.PlayerInterface;
-
-import java.util.ArrayList;
 
 public abstract class  AbstractMonster extends AbstractEntity implements Monster {
+    private boolean isInCouloir = false;
+
+    @Override
+    public boolean isInCouloir() {
+        return isInCouloir;
+    }
+
+    public void setInCouloir(boolean inCouloir) {
+        isInCouloir = inCouloir;
+    }
 
     public AbstractMonster(Position position, int hitPoints, int movement, int damages, String symbol) {
         super(position, hitPoints, movement, damages, symbol);

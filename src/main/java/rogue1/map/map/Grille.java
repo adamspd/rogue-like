@@ -487,12 +487,22 @@ public class Grille {
         DFS.searchPath(matrix,(int) monster.getPosition().getX(), (int) monster.getPosition().getY(), path);
         int size = path.size();
         dfs.printPosition(monster.getPosition());
-        grille.addPoint(monster.getPosition());
+        Player player = grille.getPlayer();
+        Position positionPlayer = new Position(player.getPosition().getX(),player.getPosition().getY());
 
-        for(int i = 0;i < size-1; i++){
-            monster.setPosition(path.get(i));
+        if (positionPlayer.getDistance(monster.getPosition()) > 1) {
+
+            grille.addPoint(monster.getPosition());
+
+            for (int i = 0; i < size - 1; i++) {
+                monster.setPosition(path.get(i));
+            }
+
+
+
+
+            grille.addSymbolMonster(monster.getPosition(), monster);
         }
-        grille.addSymbolMonster(monster.getPosition(), monster);
         System.out.println();
         dfs.printPosition(monster.getPosition());
     }
