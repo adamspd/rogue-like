@@ -26,22 +26,16 @@ public class Information {
 
     public static void Game_Over(Grille grille){
         if(grille.getPlayer().getHitPoints() <= 0) {
+            for (int i = 0; i < 4; i++) { System.out.print("\n"); }
+            for (int i = 0; i < 5; i++) { System.out.print("\t"); }
+            for (int i = 0; i < 12; i++) { System.out.print("#"); }
             System.out.println("\nGAME OVER\n");
+            for (int i = 0; i < 12; i++) { System.out.print("#"); }
+            for (int i = 0; i < 4; i++) { System.out.print("\n"); }
             System.exit(0);
         }
     }
 
-    public static void You_Win(){
-        if(Event.gagne) {
-            for (int i = 0; i < 4; i++) { System.out.print("\n"); }
-            for (int i = 0; i < 5; i++) { System.out.print("\t"); }
-            for (int i = 0; i < 12; i++) { System.out.print("#"); }
-            System.out.print("    VOUS AVEZ GAGNE !!!    ");
-            for (int i = 0; i < 12; i++) { System.out.print("#"); }
-            for (int i = 0; i < 4; i++) { System.out.print("\n"); }
-            System.exit(0);
-        }
-    }
 
 
     public static void isMonsterDead(Grille grille){
@@ -102,7 +96,6 @@ public class Information {
         int nbreMonstres = lesMonstres.size();
 
         Game_Over(grille);
-        You_Win();
         if(Event.isCalled_ifMonstersAreAllDead_ThenUpperLevelEntryOpen){
             System.out.println("#### UN ESCALIER A ETE OUVERT !! ####");
             return;

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 public class Map {
     public Map(){}
     public int NIVEAU;
-    public int NOMBRE_DE_NIVEAUX;
 
     public Grille generateSalle(){
         Grille grille = new Grille();
