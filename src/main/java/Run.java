@@ -15,11 +15,11 @@ public class Run {
         Draw draw = new Draw();
         Map map = new Map();
         Grille grille = map.generateSalle();
-        draw.draw(grille);
         Information.NOMBRE_MONSTRES_CONNU = grille.getListMonster().size(); //On sauvegarde le nombre de monstres initial.
         Information.liste_infos = new ArrayList<String>();
         map.NIVEAU = 1;
-        map.NOMBRE_DE_NIVEAUX = 3;
+        Information.liste_infos.add("NIVEAU " + map.NIVEAU);
+        draw.draw(grille);
 
 /*
         BFS union = new BFS(grille);
@@ -45,8 +45,8 @@ public class Run {
         Scanner scan = new Scanner(System.in);
         while(player.isAlive()) {
             try {
-                Event.ifMonstersAreAllDead_ThenUpperLevelEntryOpen(grille,map);
-                Event.ifPlayerHasGoneThroughTheUpperLevelEntry_ThenGenerateNewMap(grille,player,map);
+                Event.ifMonstersAreAllDead_ThenUpperLevelEntryOpen(grille,draw);
+                Event.ifPlayerHasGoneThroughTheUpperLevelEntry_ThenGenerateNewMap(grille,player,map,draw);
                 String touche = scan.nextLine();
                 if (touche.matches("z.*")){Move.moveUp(grille, grille.getPlayer()); }
                 else if (touche.matches("q.*")){Move.moveLeft(grille, grille.getPlayer());}
