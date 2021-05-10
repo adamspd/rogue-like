@@ -1,6 +1,7 @@
 package rogue3.artefact;
 
 import rogue0.utils.Position;
+import rogue1.map.map.Draw;
 import rogue1.map.map.Grille;
 import rogue1.map.map.Information;
 import rogue1.map.map.Map;
@@ -15,7 +16,6 @@ public class Event  {
     public static int posX_stairs, posY_stairs; // Haut de l'escalier.
     public static int stairs_length = 3;
     public static boolean isCalled_ifMonstersAreAllDead_ThenUpperLevelEntryOpen;
-    public static boolean gagne;
 
     private static boolean freeSpace(Grille grille, Salle salle_aleatoire, int posX) {
         if(grille.getSymbolAtCoord(new Position(posX, salle_aleatoire.getPos().getY()))==Coffre.getSymbole() ||
@@ -69,24 +69,24 @@ public class Event  {
 
 
 
-    public static void ifMonstersAreAllDead_ThenUpperLevelEntryOpen(Grille grille, Map map){     //Rend l'escalier visible
+    public static void ifMonstersAreAllDead_ThenUpperLevelEntryOpen(Grille grille, Draw draw){     //Rend l'escalier visible
         if(grille.getListMonster().isEmpty() && !isCalled_ifMonstersAreAllDead_ThenUpperLevelEntryOpen){
-            if(map.NIVEAU < map.NOMBRE_DE_NIVEAUX) {
-                for (int posY = posY_stairs; posY < posY_stairs + 3; posY++) {
-                    grille.addElement(new Position(posX_stairs, posY) , stairs_symbol);
-                }
-                isCalled_ifMonstersAreAllDead_ThenUpperLevelEntryOpen = true;
+            for (int posY = posY_stairs; posY < posY_stairs + 3; posY++) {
+                grille.addElement(new Position(posX_stairs, posY) , stairs_symbol);
             }
-            else {gagne= true;}
+            isCalled_ifMonstersAreAllDead_ThenUpperLevelEntryOpen = true;
+            draw.draw(grille);
         }
     }
 
-    public static void ifPlayerHasGoneThroughTheUpperLevelEntry_ThenGenerateNewMap(Grille grille, Player player, Map map){
+    public static void ifPlayerHasGoneThroughTheUpperLevelEntry_ThenGenerateNewMap(Grille grille, Player player, Map map, Draw draw){
         if(grille.getSymbolAtCoord(new Position(posX_stairs,posY_stairs))==player.getSymbol()){
             grille.reset(map, player);
             isCalled_ifMonstersAreAllDead_ThenUpperLevelEntryOpen= false;
             Information.NOMBRE_MONSTRES_CONNU= grille.getListMonster().size();
             map.NIVEAU++;
+            Information.liste_infos.add("NIVEAU " + map.NIVEAU);
+            draw.draw(grille);
         }
     }
 }
