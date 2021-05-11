@@ -15,8 +15,7 @@ public class Run {
         Draw draw = new Draw();
         Map map = new Map();
         Grille grille = map.generateSalle();
-        Information.NOMBRE_MONSTRES_CONNU = grille.getListMonster().size(); //On sauvegarde le nombre de monstres initial.
-        Information.liste_infos = new ArrayList<String>();
+        Information.set(grille);
         map.NIVEAU = 1;
         Information.liste_infos.add("NIVEAU " + map.NIVEAU);
         draw.draw(grille);
