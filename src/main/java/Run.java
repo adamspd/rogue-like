@@ -18,7 +18,7 @@ public class Run {
         Information.set(grille);
         map.NIVEAU = 1;
         Information.liste_infos.add("NIVEAU " + map.NIVEAU);
-        draw.draw(grille);
+        draw.draw(grille,map);
 
 /*
         BFS union = new BFS(grille);
@@ -44,7 +44,7 @@ public class Run {
         Scanner scan = new Scanner(System.in);
         while(player.isAlive()) {
             try {
-                Event.ifMonstersAreAllDead_ThenUpperLevelEntryOpen(grille,draw);
+                Event.ifMonstersAreAllDead_ThenUpperLevelEntryOpen(grille,map,draw);
                 Event.ifPlayerHasGoneThroughTheUpperLevelEntry_ThenGenerateNewMap(grille,player,map,draw);
                 String touche = scan.nextLine();
                 if (touche.matches("z.*")){Move.moveUp(grille, grille.getPlayer()); }
@@ -53,10 +53,10 @@ public class Run {
                 else if (touche.matches("d.*")){Move.moveRight(grille, grille.getPlayer());}
 
                 grille.attack(grille, player);
-                draw.draw(grille);
+                draw.draw(grille,map);
             } catch (Exception e) {
                 //System.out.println("\nException: " + e);
-                draw.draw(grille);
+                draw.draw(grille,map);
             }
         }
     }
