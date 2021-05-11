@@ -37,7 +37,7 @@ public class Information {
             for (int i = 0; i < 4; i++) { System.out.print("\n"); }
             for (int i = 0; i < 5; i++) { System.out.print("\t"); }
             for (int i = 0; i < 12; i++) { System.out.print("#"); }
-            System.out.println("\nGAME OVER\n");
+            System.out.print("    GAME OVER    ");
             for (int i = 0; i < 12; i++) { System.out.print("#"); }
             for (int i = 0; i < 4; i++) { System.out.print("\n"); }
             System.exit(0);
