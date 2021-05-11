@@ -82,13 +82,13 @@ public class Event  {
     }
 
 
-    public static void ifMonstersAreAllDead_ThenUpperLevelEntryOpen(Grille grille, Draw draw){     //Rend l'escalier visible
+    public static void ifMonstersAreAllDead_ThenUpperLevelEntryOpen(Grille grille, Map map, Draw draw){     //Rend l'escalier visible
         if(grille.getListMonster().isEmpty() && !isCalled_ifMonstersAreAllDead_ThenUpperLevelEntryOpen){
             for (int posY = posY_stairs; posY < posY_stairs + stairs_length; posY++) {
                 grille.addElement(new Position(posX_stairs, posY) , stairs_symbol);
             }
             isCalled_ifMonstersAreAllDead_ThenUpperLevelEntryOpen = true;
-            draw.draw(grille);
+            draw.draw(grille,map);
         }
     }
 
@@ -101,7 +101,7 @@ public class Event  {
             map.NIVEAU++;
             Information.liste_infos.add("NIVEAU " + map.NIVEAU);
             Information.NOMBRE_MONSTRES_CONNU= grille.getListMonster().size();
-            draw.draw(grille);
+            draw.draw(grille,map);
         }
     }
 }
