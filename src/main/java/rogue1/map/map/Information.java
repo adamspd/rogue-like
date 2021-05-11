@@ -12,6 +12,14 @@ import java.util.ArrayList;
 public class Information {
     public static int NOMBRE_MONSTRES_CONNU;
     public static ArrayList<String> liste_infos;  //Ajouté à un stade de développement déjà assez avancé.
+    private static  int cpt_messages_escalier;
+
+
+    public static void set(Grille grille) {
+        NOMBRE_MONSTRES_CONNU= grille.getListMonster().size(); //On sauvegarde le nombre de monstres initial.
+        liste_infos= new ArrayList<String>();
+        cpt_messages_escalier= 0;
+    }
 
     public static void afficher_liste_info(){
         if(liste_infos!=null) {
@@ -96,15 +104,17 @@ public class Information {
         int nbreMonstres = lesMonstres.size();
 
         Game_Over(grille);
-        if(Event.isCalled_ifMonstersAreAllDead_ThenUpperLevelEntryOpen){
+        if(Event.isCalled_ifMonstersAreAllDead_ThenUpperLevelEntryOpen && cpt_messages_escalier<1){
             System.out.println("#### UN ESCALIER A ETE OUVERT !! ####");
-            return;
+            cpt_messages_escalier++;
         }
-        isEnoughfar(grille,lesMonstres,joueur, 1);
-        afficher_liste_info(); //Le joueur attaque le monstre !
-        isMonsterDead(grille);
-        SeeObject(grille,lesPotions,joueur);
-        SeePortal(grille,lesPortails,joueur);
+        else {
+            isEnoughfar(grille, lesMonstres, joueur, 1);
+            afficher_liste_info(); //Le joueur attaque le monstre !
+            isMonsterDead(grille);
+            SeeObject(grille, lesPotions, joueur);
+            SeePortal(grille, lesPortails, joueur);
+        }
         System.out.println();
         if (joueur.getPotionReserve() > 1){
             System.out.println("Le nombre de Monstres : " + nbreMonstres + "\t \t Points de Vie restants: "+ lifePoints +
