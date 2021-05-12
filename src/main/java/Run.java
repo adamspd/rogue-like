@@ -18,7 +18,7 @@ public class Run {
         Information.set(grille);
         map.NIVEAU = 1;
         Information.liste_infos.add("NIVEAU " + map.NIVEAU);
-        draw.draw(grille,map);
+        draw.draw(grille);
 
 /*
         BFS union = new BFS(grille);
@@ -53,10 +53,11 @@ public class Run {
                 else if (touche.matches("d.*")){Move.moveRight(grille, grille.getPlayer());}
 
                 grille.attack(grille, player);
-                draw.draw(grille,map);
+                draw.draw(grille);
+                Information.Game_Over(grille,map);
             } catch (Exception e) {
                 //System.out.println("\nException: " + e);
-                draw.draw(grille,map);
+                draw.draw(grille);
             }
         }
     }
