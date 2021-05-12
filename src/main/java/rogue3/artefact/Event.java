@@ -88,7 +88,7 @@ public class Event  {
                 grille.addElement(new Position(posX_stairs, posY) , stairs_symbol);
             }
             isCalled_ifMonstersAreAllDead_ThenUpperLevelEntryOpen = true;
-            draw.draw(grille,map);
+            draw.draw(grille);
         }
     }
 
@@ -101,7 +101,7 @@ public class Event  {
             map.NIVEAU++;
             Information.liste_infos.add("NIVEAU " + map.NIVEAU);
             Information.NOMBRE_MONSTRES_CONNU= grille.getListMonster().size();
-            draw.draw(grille,map);
+            draw.draw(grille);
         }
     }
 }
