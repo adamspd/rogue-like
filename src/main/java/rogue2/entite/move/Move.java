@@ -71,35 +71,49 @@ public class Move {
             player.setPosition(position);
             grille.addEntite(player);
         }
-        else if(grille.isPortalThere(position)){
+        else if(grille.isPortalThere(position)) {
             grille.addPoint(player.getPosition());
             Portal portail_de_sortie = Portal.entrerPortail(position, grille);
             position.setPos(portail_de_sortie.getPosition());
             player.setPosition(portail_de_sortie.getPosition());
 
             isEnteredInPortal = true;
-            if(direction=="down"){
-                position.setPos(position.getX(),position.getY()+1);
-                if(grille.getSymbolAtCoord(position)==grille.getSymbolGrille()) {moveUp(grille, player);}
-                else{moveDown(grille, player);}
-            }
-            else if (direction=="up"){
-                position.setPos(position.getX(),position.getY()-1);
-                if(grille.getSymbolAtCoord(position)==grille.getSymbolGrille()) {moveDown(grille, player);}
-                else{moveUp(grille, player);}
-            }
-            else if (direction=="left"){
-                position.setPos(position.getX()-1,position.getY());
-                if(grille.getSymbolAtCoord(position)==grille.getSymbolGrille()) {moveRight(grille, player);}
-                else{moveLeft(grille, player);}
-            }
-            else if (direction=="right"){
-                position.setPos(position.getX()+1,position.getY());
-                if(grille.getSymbolAtCoord(position)==grille.getSymbolGrille()) {moveLeft(grille, player);}
-                else{moveRight(grille, player);}
+            if (direction == "down") {
+                try{
+                    position.setPos(position.getX(), position.getY() + 1);
+                    if (grille.getSymbolAtCoord(position) != grille.getSymbolGrille()) { moveDown(grille, player); }
+                    else { moveUp(grille, player); }
+                } catch(ArrayIndexOutOfBoundsException e){ moveUp(grille, player); }
+
+
+            } else if (direction == "up") {
+                try{
+                    position.setPos(position.getX(), position.getY() - 1);
+                    if (grille.getSymbolAtCoord(position) != grille.getSymbolGrille()) { moveUp(grille, player); }
+                    else { moveDown(grille, player); }
+                } catch(ArrayIndexOutOfBoundsException e){ moveDown(grille, player); }
+
+
+            } else if (direction == "left") {
+                try{
+                    position.setPos(position.getX() - 1, position.getY());
+                    if (grille.getSymbolAtCoord(position) != grille.getSymbolGrille()) { moveLeft(grille, player); }
+                    else { moveRight(grille, player); }
+                } catch(ArrayIndexOutOfBoundsException e){ moveRight(grille, player); }
+
+
+            } else if (direction == "right") {
+                try{
+                    position.setPos(position.getX() + 1, position.getY());
+                    if (grille.getSymbolAtCoord(position) != grille.getSymbolGrille()) { moveRight(grille, player); }
+                    else { moveLeft(grille, player); }
+                }
+                catch(ArrayIndexOutOfBoundsException e){ moveLeft(grille, player); }
             }
             isEnteredInPortal = false;
             return;  //Pour éviter des bugs potentiels, notamment d'éclatement de carte.
+
+
         }
         else if (grille.isMonsterThere(position)){
             if(isEnteredInPortal) { // A la sortie du portail, le monstre est transpersé.
