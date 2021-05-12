@@ -34,13 +34,12 @@ public class Information {
 
     public static void Game_Over(Grille grille, Map map){
         if(grille.getPlayer().getHitPoints() <= 0) {
-            System.out.println("\n");
+            for (int i = 0; i < 3; i++) { System.out.print("\n"); }
             for (int i = 0; i < 5; i++) { System.out.print("\t"); }
             for (int i = 0; i < 12; i++) { System.out.print("#"); }
             System.out.print("    GAME OVER    ");
             for (int i = 0; i < 12; i++) { System.out.print("#"); }
-            System.out.println("\n\n");
-            for (int i = 0; i < 3; i++) { System.out.print("\n"); }
+            for (int i = 0; i < 4; i++) { System.out.print("\n"); }
             System.out.println("Niveau:  " + map.NIVEAU);
             System.exit(0);
         }
@@ -96,7 +95,7 @@ public class Information {
         }
     }
 
-    public static void Affichage(Grille grille, Map map){
+    public static void Affichage(Grille grille){
         ArrayList<Monster> lesMonstres = grille.getListMonster();
         ArrayList<Potion> lesPotions = grille.getListPotion();
         ArrayList<Portal> lesPortails = grille.getListPortail();
@@ -105,7 +104,6 @@ public class Information {
         int lifePoints = joueur.getHitPoints();
         int nbreMonstres = lesMonstres.size();
 
-        Game_Over(grille,map);
         if(Event.isCalled_ifMonstersAreAllDead_ThenUpperLevelEntryOpen && cpt_messages_escalier<1){
             System.out.println("#### UN ESCALIER A ETE OUVERT !! ####");
             cpt_messages_escalier++;

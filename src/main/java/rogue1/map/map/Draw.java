@@ -13,7 +13,7 @@ public class Draw {
     private Grille grille;
     public Draw(){}
 
-    public void draw(Grille grille, Map map){
+    public void draw(Grille grille){
         this.grille = grille;
         String symbol_grille = grille.getSymbolGrille();
         String symbol_salle = grille.getSymbolSalle();
@@ -53,7 +53,7 @@ public class Draw {
             System.out.println("");
         }
 
-            Information.Affichage(grille, map);
+            Information.Affichage(grille);
             //affiche(grille);
             //rechercheJoeur(grille);
 
