@@ -18,7 +18,6 @@ public class Event  {
     public static int stairs_length = 3;
     public static boolean isCalled_ifMonstersAreAllDead_ThenUpperLevelEntryOpen;
     public static boolean noSpaceFound;
-    static boolean test = false;
 
 
     //Quand on a l'entier_si_pas_espace, on ne regarde que la 1ère case au dessus de la salle
@@ -60,10 +59,6 @@ public class Event  {
 
         //Recherche d' un espace libre
         try {
-            if (!test) {
-                test=true;
-                throw new Exception();
-            }
             do {
                 //On prend une salle aléatoire
                 salle_aleatoire = listeSallesDisponibles.get((int) (Math.random() * listeSallesDisponibles.size()));
