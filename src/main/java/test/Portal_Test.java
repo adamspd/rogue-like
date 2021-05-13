@@ -25,6 +25,7 @@ public class Portal_Test {
     static Portal portailArrive;
 
 
+    //A lancer dans Run
     public static void Start(){
         Grille1();
         System.out.println("JumpDown = " + JumpDown());

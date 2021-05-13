@@ -18,8 +18,10 @@ public class Stairs_Test {
     static int niveauActuel;
 
 
+
     //4 tests: Une page d'actualisation intégrée dans le jeu (suite à la génération de l'escalier ou au changement de niveau)
     //         Puis le résultat du test.
+    //A lancer dans Run
     public static void Start() {
         map.NIVEAU = 1;
         niveauActuel = map.NIVEAU;
