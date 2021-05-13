@@ -22,8 +22,9 @@ public class Run {
         Information.liste_infos.add("NIVEAU " + map.NIVEAU);
         draw.draw(grille);
 
-        //Stairs_Test.Start();
         //Portal_Test.Start();
+        //Stairs_Test.Start();
+
 
 /*
         BFS union = new BFS(grille);
