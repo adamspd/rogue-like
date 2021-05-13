@@ -11,7 +11,7 @@ les Objects
 @ : Le joueur.
 P : Portail de téléportation. 
 ¤ : Coffre qui peut être un bonus sur les points de Vie ou un trou noir où tu meurs direct. 
-K : Les clés. 
+K : Les clés.  
 ! : Les Potions magiques qui augmentent les points de vie.
 G : Goblin archer.
 O : Orc warrior.
