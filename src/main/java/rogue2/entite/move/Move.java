@@ -126,11 +126,15 @@ public class Move {
             else { player.attackMonster(grille, position); }
         }
         else if(grille.isStairsThere(position)){
-            //Si le joueur est à l'entrée de l'escalier
-            if(player.getPosition().getX()==Event.posX_stairs&&player.getPosition().getY()==Event.posY_stairs+Event.stairs_length) {
-                grille.addPoint(player.getPosition());
+            if(!Event.noSpaceFound) {
+                //Si le joueur est à l'entrée de l'escalier
+                if (player.getPosition().getX() == Event.posX_stairs && player.getPosition().getY() == Event.posY_stairs + Event.stairs_length) {
+                    grille.addPoint(player.getPosition());
+                }
+                else if (direction == "up" || direction == "down") { grille.addElement(player.getPosition(), Event.stairs_symbol); }
             }
-            else if (direction=="up" || direction=="down"){grille.addElement(player.getPosition(), Event.stairs_symbol);}
+            else if(isInCouloir){ grille.addElement(player.getPosition(), grille.getSymbolCouloir()); }
+            else {grille.addPoint(player.getPosition());}
             player.setPosition(position);
             grille.addEntite(player);
         }
