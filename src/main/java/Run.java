@@ -6,6 +6,8 @@ import rogue1.map.map.Map;
 import rogue2.entite.move.Move;
 import rogue2.entite.player.Player;
 import rogue3.artefact.Event;
+import test.Portal_Test;
+import test.Stairs_Test;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -19,6 +21,9 @@ public class Run {
         map.NIVEAU = 1;
         Information.liste_infos.add("NIVEAU " + map.NIVEAU);
         draw.draw(grille);
+
+        //Stairs_Test.Start();
+        //Portal_Test.Start();
 
 /*
         BFS union = new BFS(grille);
