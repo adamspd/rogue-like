@@ -96,7 +96,7 @@ public class Grille {
         ArrayList<Salle> listeSalle = grille.getListOfSalle();
 
         for (Salle salle : listeSalle) {
-            final int maxMonster = 1;
+            final int maxMonster = 2;
             final int distancePlayerMonster = 2;
             int choixNombreDeMonstre = (int) (Math.random() * (maxMonster + 1));
             ArrayList<Position> coord = initialiseEntite(grille, choixNombreDeMonstre, salle, player, distancePlayerMonster);
