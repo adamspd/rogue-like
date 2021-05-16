@@ -40,4 +40,31 @@ public class Potion extends abstractArtefact{
             }
         }
     }
+
+    public static void drinkPotion(Player player){
+        int potionReserve = player.getPotionReserve();
+        if (potionReserve > 0){
+            player.setHitPoints(player.getHitPoints() + 5);
+            potionReserve--;
+            player.setPotionReserve(potionReserve);
+            if (checkPvPlayer(player)){
+                player.setHitPoints(100);
+            }
+        }
+    }
+
+    public static void drinkPotion2(Player player){
+        int potionReserve = player.getPotionReserve();
+        if (potionReserve > 0){
+            if (player.getHitPoints() > 95){
+                System.out.println("Vous avez assez de points de vie !");
+            } else {
+                player.setHitPoints(player.getHitPoints() + 5);
+                potionReserve--;
+                player.setPotionReserve(potionReserve);
+            }
+        } else {
+            System.out.println("Vous n'avez rien en reserve, putain de merde !");
+        }
+    }
 }

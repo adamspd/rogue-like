@@ -24,9 +24,9 @@ public class Draw {
                 if (s == symbol_grille) {
                     System.out.print(Couleur.ROUGE + s + Couleur.RESET);
                 }
-                else if (s.equals(symbol_salle)) {
+                else if (s.equals("K ") || s.equals(symbol_salle)) {
                     System.out.print(Couleur.BLANC + s + Couleur.RESET);
-                }else if (s.equals("K ") || (s.equals("£ ")) || (s.equals("! ")) || (s.equals("¤ "))){
+                }else if ( (s.equals("£ ")) || (s.equals("! ")) || (s.equals("¤ "))){
                     System.out.print(Couleur.VERT + s + Couleur.RESET);
                 }
                 else if (s.equals("P ")){

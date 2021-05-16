@@ -93,7 +93,7 @@ public class Event  {
     }
 
 
-    public static void ifMonstersAreAllDead_ThenUpperLevelEntryOpen(Grille grille, Map map, Draw draw){     //Rend l'escalier visible
+    public static void ifMonstersAreAllDead_ThenUpperLevelEntryOpen(Grille grille, Draw draw){     //Rend l'escalier visible
         if(!isCalled_ifMonstersAreAllDead_ThenUpperLevelEntryOpen && grille.getListMonster().isEmpty()) {
             if (!noSpaceFound) {
                 for (int posY = posY_stairs; posY < posY_stairs + stairs_length; posY++) {

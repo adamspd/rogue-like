@@ -4,10 +4,7 @@ import rogue0.utils.Position;
 import rogue1.map.map.Grille;
 import rogue2.entite.monstre.Monster;
 import rogue2.entite.player.Player;
-import rogue3.artefact.Coffre;
-import rogue3.artefact.Event;
-import rogue3.artefact.Portal;
-import rogue3.artefact.Potion;
+import rogue3.artefact.*;
 
 public class Move {
     public static boolean isInCouloir = false;
@@ -49,7 +46,7 @@ public class Move {
 
     public static void move(Grille grille, Player player, Position position){
         if(grille.isInSalle(position)||grille.isInCouloir(position)||
-                grille.isPotionThere(position)||grille.isSafeThere(position)){
+                grille.isPotionThere(position)||grille.isSafeThere(position) || grille.isKeyThere(position)){
             if(isInCouloir) {
                 grille.addElement(player.getPosition(), grille.getSymbolCouloir());
             }
@@ -58,6 +55,9 @@ public class Move {
                     Potion.hasDrunkPotion(grille, position);
                 } else if (grille.isSafeThere(position)){
                     Coffre.hasOpenSafe(grille, position);
+                } else if (grille.isKeyThere(position)){
+                    Key.gotKey(grille, position);
+                    grille.addPoint(position);
                 }
                 if(direction=="down" && position.getX()==Event.posX_stairs && position.getY()==Event.posY_stairs+Event.stairs_length) { grille.addElement(player.getPosition(), Event.stairs_symbol);}
                 else if(grille.getSymbolAtCoord(player.getPosition())!= Portal.getSymbole()){grille.addPoint(player.getPosition());}

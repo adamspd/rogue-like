@@ -6,6 +6,8 @@ import rogue1.map.map.Map;
 import rogue2.entite.move.Move;
 import rogue2.entite.player.Player;
 import rogue3.artefact.Event;
+import rogue3.artefact.Key;
+import rogue3.artefact.Potion;
 
 import java.util.Scanner;
 
@@ -51,16 +53,19 @@ public class Run {
         Scanner scan = new Scanner(System.in);
         while(player.isAlive()) {
             try {
-                Event.ifMonstersAreAllDead_ThenUpperLevelEntryOpen(grille,map,draw);
+                Event.ifMonstersAreAllDead_ThenUpperLevelEntryOpen(grille,draw);
                 Event.ifPlayerHasGoneThroughTheUpperLevelEntry_ThenGenerateNewMap(grille,player,map,draw);
+                Key.showKey(grille);
                 String touche = scan.nextLine();
                 if (touche.matches("z.*")){Move.moveUp(grille, grille.getPlayer()); }
                 else if (touche.matches("q.*")){Move.moveLeft(grille, grille.getPlayer());}
                 else if (touche.matches("s.*")){Move.moveDown(grille, grille.getPlayer());}
                 else if (touche.matches("d.*")){Move.moveRight(grille, grille.getPlayer());}
 
+
                 grille.attack(grille, player);
                 draw.draw(grille);
+                if (touche.matches("p.*")){Potion.drinkPotion2(grille.getPlayer());}
                 Information.Game_Over(grille,map);
             } catch (Exception e) {
                 //System.out.println("\nException: " + e);

@@ -33,6 +33,7 @@ public class Grille {
     private ArrayList <Potion> listPotion = new ArrayList<>();
 
 
+
     public Grille(){
         for (int i = 0 ; i < getLength(); i++) {
             for (int j = 0; j < getWidth(); j++) {
@@ -74,6 +75,11 @@ public class Grille {
         listArtefact.add(artefact);
     }
 
+    public void addKey(Key key) {
+        grille[key.getPosition().getY()][key.getPosition().getX()] = key.getSymbol();
+        listKey.add(key);
+    }
+
     public void initialiseSalle(Grille grille) {
         int salleGenere = 0;
         while (salleGenere<nombreSalle){
@@ -90,7 +96,7 @@ public class Grille {
         ArrayList<Salle> listeSalle = grille.getListOfSalle();
 
         for (Salle salle : listeSalle) {
-            final int maxMonster = 3;
+            final int maxMonster = 1;
             final int distancePlayerMonster = 2;
             int choixNombreDeMonstre = (int) (Math.random() * (maxMonster + 1));
             ArrayList<Position> coord = initialiseEntite(grille, choixNombreDeMonstre, salle, player, distancePlayerMonster);
@@ -114,30 +120,27 @@ public class Grille {
             }
         }
     }
+
     public void initialiseArtefact(Grille grille){
         Player player = getPlayer();
         ArrayList<Salle> listeSalle = grille.getListOfSalle();
 
         for (Salle salle : listeSalle) {
-            final int maxMonster = 4;
+            final int maxArtefact = 2;
             final int distancePlayerMonster = 2;
-            int choixNombreDeMonstre = (int) (Math.random() * (maxMonster + 1));
+            int choixNombreDeMonstre = (int) (Math.random() * (maxArtefact + 1));
             ArrayList<Position> coord = initialiseEntite(grille, choixNombreDeMonstre, salle, player, distancePlayerMonster);
 
             if (coord.size() != 0) {
                 ArtefactFactory factory = ArtefactFactory.getInstance();
                 while (coord.size() != 0) {
-                    int choix = Utils.randInt(3);
+                    int choix = Utils.randInt(2);
                     if (choix == 0){
                         Artefact artefact = factory.generate(coord.remove(0), "¤ ");
                         grille.addEntite(artefact);
                         listCoffre.add((Coffre) artefact);
-                    } else if (choix == 1){
-                        Artefact artefact = factory.generate(coord.remove(0), "K ");
-                        grille.addEntite(artefact);
-                        listKey.add((Key) artefact);
                     }
-                    else if (choix == 2) {
+                    else if (choix == 1) {
                         Artefact artefact = factory.generate(coord.remove(0), "! ");
                         grille.addEntite(artefact);
                         listPotion.add((Potion) artefact);
@@ -204,6 +207,10 @@ public class Grille {
 
     public boolean isPotionThere(Position position) {
         return grille[position.getY()][position.getX()].equals("! ");
+    }
+
+    public boolean isKeyThere(Position position) {
+        return grille[position.getY()][position.getX()].equals("K ");
     }
 
     public boolean isSafeThere(Position position) {
@@ -278,7 +285,7 @@ public class Grille {
         }
 
         joueur.setPosition(nouvelle_grille.getPlayer().getPosition());
-
+        //listKey = nouvelle_grille.getListKey();
         listOfSalle = nouvelle_grille.getListOfSalle();
         listMonster = nouvelle_grille.getListMonster();
         listPotion = nouvelle_grille.getListPotion();
