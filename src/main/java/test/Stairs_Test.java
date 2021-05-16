@@ -1,3 +1,4 @@
+/*
 package test;
 
 import rogue0.utils.Position;
@@ -87,4 +88,4 @@ public class Stairs_Test {
         Event.ifPlayerHasGoneThroughTheUpperLevelEntry_ThenGenerateNewMap(grille, player, map, draw);
         return niveauActuel < map.NIVEAU;
     }
-}
+}*/

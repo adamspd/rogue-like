@@ -1,3 +1,4 @@
+/*
 package test;
 
 import rogue0.utils.Position;
@@ -216,3 +217,4 @@ public class Portal_Test {
 }
 
 
+*/

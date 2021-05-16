@@ -6,11 +6,12 @@ import rogue1.map.map.Map;
 import rogue2.entite.move.Move;
 import rogue2.entite.player.Player;
 import rogue3.artefact.Event;
-import test.Portal_Test;
-import test.Stairs_Test;
 
-import java.util.ArrayList;
 import java.util.Scanner;
+
+/*import test.Portal_Test;
+import test.Stairs_Test;
+*/
 
 public class Run {
     public static void main(String[] args) {

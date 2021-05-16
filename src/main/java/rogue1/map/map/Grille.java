@@ -197,10 +197,10 @@ public class Grille {
 
 
     public boolean isInSalle(Position position)
-        { return grille[(int)position.getY()][(int)position.getX()].equals(getSymbolSalle()); }
+        { return grille[(int)position.getY()][(int)position.getX()] == getSymbolSalle(); }
 
     public boolean isInCouloir(Position position)
-    { return grille[(int)position.getY()][(int)position.getX()].equals(getSymbolCouloir()); }
+    { return grille[(int)position.getY()][(int)position.getX()] == getSymbolCouloir(); }
 
     public boolean isPotionThere(Position position) {
         return grille[(int)position.getY()][(int)position.getX()].equals("! ");
@@ -491,14 +491,30 @@ public class Grille {
         Position positionPlayer = new Position(player.getPosition().getX(),player.getPosition().getY());
 
         if (positionPlayer.getDistance(monster.getPosition()) > 1) {
-
-            grille.addPoint(monster.getPosition());
-
+            //grille.addPoint(monster.getPosition());
+            //Position positionInitial = monster.getPosition();
+            boolean isINSALLE = false;
+            ArrayList<Salle> listeSalle = grille.getListOfSalle();
+            for (Salle salle : listeSalle){
+                if ((salle.getPos().getX() <= monster.getPosition().getX() &&
+                    monster.getPosition().getX() < (salle.getPos().getX() + salle.getSalleWidth())) &&
+                        (salle.getPos().getY() <= monster.getPosition().getY() &&
+                        monster.getPosition().getY() < (salle.getPos().getY() + salle.getSalleLenght()))){
+                    isINSALLE = true;
+                }
+                if (isINSALLE) {
+                    grille.addElement(monster.getPosition(), "* ");
+                }
+                else {grille.addElement(monster.getPosition(), "# ");}
+                }
             for (int i = 0; i < size - 1; i++) {
-                monster.setPosition(path.get(i));
-            }
 
+            monster.setPosition(path.get(i));
 
+        }
+            isINSALLE = false;
+
+            //positionInitial = monster.getPosition();
 
 
             grille.addSymbolMonster(monster.getPosition(), monster);
@@ -507,3 +523,8 @@ public class Grille {
         dfs.printPosition(monster.getPosition());
     }
 }
+/* if (grille.isInSalle(monster.getPosition())){ grille.addElement(monster.getPosition(), "* ");}
+            else {
+               // System.out.println(grille.getSymbolAtCoord(monster.getPosition()));
+                grille.addElement(monster.getPosition(), grille.getSymbolAtCoord(monster.getPosition()));}
+//grille.addPoint(monster.getPosition());*/
