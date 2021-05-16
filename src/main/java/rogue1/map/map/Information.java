@@ -23,11 +23,11 @@ public class Information {
 
     public static void afficher_liste_info(){
         if(liste_infos!=null) {
-            System.out.println();
+            //System.out.println();
             for (String info : liste_infos) {
                 System.out.println(info);
             }
-            System.out.println();
+            //System.out.println();
             liste_infos.clear();
         }
     }
@@ -51,8 +51,7 @@ public class Information {
         int nouveau_nombre_monstres = grille.getListMonster().size();
         if (nouveau_nombre_monstres < NOMBRE_MONSTRES_CONNU){
             if(nouveau_nombre_monstres >= 0) {
-                System.out.println("\n#### COUP FATALE !! ####");
-                System.out.println("#### UN MONSTRE EST MORT ####" + "\n");
+                System.out.println("UN MONSTRE EST MORT");
             }
             NOMBRE_MONSTRES_CONNU= nouveau_nombre_monstres;
         }
@@ -69,17 +68,17 @@ public class Information {
                     monstre.getPosition(),
                     distance,grille,player);
             if (estEnCombat) {
-                System.out.println("#### DANGER #### LE COMBAT EST ENGAGE ##########");
+                //System.out.println("#### DANGER #### LE COMBAT EST ENGAGE ##########");
             }
         }
     }
-    private static void SeeObject(Grille grille, ArrayList<Potion> potions, Player player) {
+    private static void SeePotion(Grille grille, ArrayList<Potion> potions, Player player) {
         for (Potion potion : potions) {
             boolean seeIt = !Utils.estAssezLoinDuJoueur(
                     potion.getPosition(),
                     1, grille, player);
             if (seeIt) {
-                System.out.println("$$$$ Potion En vue $$$$");
+                System.out.println("Potion there !");
             }
         }
     }
@@ -90,7 +89,7 @@ public class Information {
                     portal.getPosition(),
                     1, grille, player);
             if(SeeIt){
-                System.out.println("#### Un portail ! ####");
+                System.out.println("Portal there !");
             }
         }
     }
@@ -105,23 +104,23 @@ public class Information {
         int nbreMonstres = lesMonstres.size();
 
         if(Event.isCalled_ifMonstersAreAllDead_ThenUpperLevelEntryOpen && cpt_messages_escalier<1){
-            System.out.println("#### UN ESCALIER A ETE OUVERT !! ####");
+            System.out.println("UN ESCALIER A ETE OUVERT !! ");
             cpt_messages_escalier++;
         }
         else {
             isEnoughfar(grille, lesMonstres, joueur, 1);
             afficher_liste_info(); //Le joueur attaque le monstre !
             isMonsterDead(grille);
-            SeeObject(grille, lesPotions, joueur);
+            SeePotion(grille, lesPotions, joueur);
             SeePortal(grille, lesPortails, joueur);
         }
         System.out.println();
         if (joueur.getPotionReserve() > 1){
-            System.out.println("Le nombre de Monstres : " + nbreMonstres + "\t \t Points de Vie restants: "+ lifePoints +
-                    "\t \t Potions en reserve: " + joueur.getPotionReserve());
+            System.out.println("Monstres : " + nbreMonstres + "\t \t XP: "+ lifePoints +
+                    "\t \t Potions : " + joueur.getPotionReserve());
         } else {
-            System.out.println("Le nombre de Monstres : " + nbreMonstres + "\t \t Points de Vie restants: "+ lifePoints +
-                    "\t \t Potion en reserve: " + joueur.getPotionReserve());
+            System.out.println("Monstres : " + nbreMonstres + "\t \t XP : "+ lifePoints +
+                    "\t \t Potion : " + joueur.getPotionReserve());
         }
     }
 }

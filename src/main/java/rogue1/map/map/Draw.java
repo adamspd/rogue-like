@@ -18,8 +18,6 @@ public class Draw {
         String symbol_grille = grille.getSymbolGrille();
         String symbol_salle = grille.getSymbolSalle();
         String[][] ArrayGrille = grille.getGrille();
-        //ArrayList<Artefact> listeArtefact = grille.getListArtefact();
-        //for (Artefact artefact : listeArtefact) {
 
         for (String[] tab : ArrayGrille) {
             for (String s : tab) {
@@ -59,13 +57,7 @@ public class Draw {
 
     }
 
-    public void affiche(Grille grille){
-        ArrayList<Monster> listMonster = grille.getListMonster();
-        System.out.println("Nombre Monstre: " + listMonster.size());
-        for (Monster monster : listMonster) {
-            System.out.print("x: " + monster.getPosition().getX() + " y: " + monster.getPosition().getY()+"\t");
-        }
-    }
+
 
     /*public void rechercheJoeur(Grille grille){
         DFS DFS = new DFS(grille);

@@ -55,7 +55,6 @@ public class Move {
             }
             else {
                 if (grille.isPotionThere(position)){
-                    System.out.println("yes yes");
                     Potion.hasDrunkPotion(grille, position);
                 } else if (grille.isSafeThere(position)){
                     Coffre.hasOpenSafe(grille, position);

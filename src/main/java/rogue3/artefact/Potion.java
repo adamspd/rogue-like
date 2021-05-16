@@ -17,15 +17,18 @@ public class Potion extends abstractArtefact{
         Player player = grille.getPlayer();
         if (!checkPvPlayer(player)){
             player.setHitPoints(player.getHitPoints() + 5);
+            if (checkPvPlayer(player)){
+                player.setHitPoints(100);
+            }
         } else {
             player.setPotionReserve(player.getPotionReserve() + 1);
         }
         grille.addPoint(position);
-        removePotionFromList(grille, (int) position.getX(), (int) position.getY());
+        removePotionFromList(grille, position.getX(), position.getY());
     }
 
     private static boolean checkPvPlayer(PlayerInterface player){
-        return player.getHitPoints() == player.getMaxHitPoints();
+        return player.getHitPoints() >= player.getMaxHitPoints();
 
     }
 
