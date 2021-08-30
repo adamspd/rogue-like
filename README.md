@@ -1,4 +1,4 @@
-Adams; PIERRE DAVID; adamspd; Judicael; NSHIMIYE; judicael99 David; PRIGODIN; davidPRIGODIN Rodrigue; POISSON; RodriguePoisson
+Adams; PIERRE DAVID; adamspd; Judicael; NSHIMIYE; judicael99 David; PRIGODIN; davidPRIGODIN
 
 Guide d'utilisation
 
